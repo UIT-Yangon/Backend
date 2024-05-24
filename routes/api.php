@@ -17,7 +17,7 @@ use App\Http\Controllers\AdminAuthController;
 Route::post('/login', [AdminAuthController::class, 'login']);
 Route::post('/register', [AdminAuthController::class, 'register']);
 Route::get('/posts', [PostController::class, 'index']);
-Route::get('/staff', [StaffController::class, 'index']);
+// Route::get('/staff', [StaffController::class, 'index']);
 
 ///-------------------------Conferences -------------------------------////
 
@@ -48,7 +48,7 @@ Route::get('/subjects/{id}', [SubjectController::class, 'show']);
  * @param int $id The ID of the staff to retrieve.
  * @return \Illuminate\Http\JsonResponse
  */
-Route::get('/staff/{id}', [StaffController::class, 'show']);
+// Route::get('/staff/{id}', [StaffController::class, 'show']);
 /**
  * Middleware-protected routes for authenticated users.
  */
@@ -64,7 +64,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['middleware' => ['xss']], function () {
         Route::resource('/posts', PostController::class)->except(['index', 'show']);
         Route::resource('/subjects', SubjectController::class)->except(['index', 'show']);
-        Route::resource('/teachers', TeacherController::class)->except(['index', 'show']);
         Route::resource('/conferences', ConferenceController::class)->except(['index', 'show']);
     });
     /**
