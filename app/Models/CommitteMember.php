@@ -10,7 +10,7 @@ class CommitteMember extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'rank', 'position','speaker_type','member_type', 'chair_type', 'nation', 'university','conference_id'
+        'name', 'rank','image', 'position','speaker_type','member_type', 'chair_type', 'nation', 'university','conference_id'
     ];
     public function conference()
     {

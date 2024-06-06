@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('rank');
             $table->string('position')->nullable();
+            $table->string('image')->nullable();
             $table->foreignId('conference_id')->constrained();
             $table->enum('speaker_type',['keynote','invited','none']);
             $table->enum('member_type',['organizing','program','none']);

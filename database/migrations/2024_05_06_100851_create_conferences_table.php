@@ -26,7 +26,8 @@ return new class extends Migration
             $table->bigInteger('foreign_fee');
             $table->date('conference_date');
             $table->string('paper_format');
-            $table->json('topics')->default(json_encode(['Ai','Cloud','Deep Learning'])); // Define 'topics' column with default empty array
+            $table->json('topics')->default(json_encode(['Ai','Cloud','Deep Learning']));
+            
             $table->string('images');
             $table->timestamps();
         });
