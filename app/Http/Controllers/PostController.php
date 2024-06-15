@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
-
+    
 
     public function index(Request $request)
     {
