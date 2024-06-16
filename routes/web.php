@@ -24,4 +24,5 @@ Route::prefix('/news')->group(function(){
     Route::post('/store',[NewsController::class,'store'])->name('news#store');
     Route::get('/detail/{id}',[NewsController::class,'detail'])->name('news#detailPage');
     Route::get('/edit/{id}',[NewsController::class,'editPage'])->name('news#editPage');
+    Route::get('/delete/{id}',[NewsController::class,'delete'])->name('news#deletePage');
 });

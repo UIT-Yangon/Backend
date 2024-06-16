@@ -20,7 +20,7 @@
                       </div>
                       <div class="form-group">
                         <label>File upload</label>
-                        <input type="file" id="images" class="form-control bg-white" name="images[]"  multiple>
+                        <input type="file" id="images" class="form-control bg-white" name="images[]" multiple  >
 
                       </div>
                       <div class="form-group">

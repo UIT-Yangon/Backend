@@ -5,12 +5,20 @@
         <div class="col-lg-12 grid-margin">
             <div class="">
                 <div class="card-body">
+                    @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{ session('success') }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                    @endif
                     <div class="d-flex justify-content-between mb-3">
                         <h4 class="card-title">Manage News</h4>
 
                         <div class="d-flex justify-content-between">
 
-                          <a href="{{route('news#create')}}"><button class="btn me-3" style="background-color: #3798A6">+ Add</button></a>
+                          <a href="{{route('news#create')}}" class="btn" style="background-color: #3798A6; padding-top:10px">+ Add</a>
 
                         <div >
                           <form method="GET" class="d-flex" action="{{ route('news#list') }}">
@@ -45,7 +53,7 @@
                                             <a href="{{ route('news#detailPage', $d->id) }}" class="btn  "
                                                 style="background-color: #3798A6 !important"><i
                                                     class="fa-solid fa-eye text-white"></i>Details</a>
-                                            <a href="" class="btn btn-danger "><i
+                                            <a href="{{ route('news#deletePage', $d->id) }}" class="btn btn-danger "><i
                                                     class="fa-solid fa-circle-info text-white"></i>Delete</a>
                                         </td>
                                         <td> {{ $d->updated_at }}</td>

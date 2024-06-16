@@ -19,7 +19,7 @@ class NewsController extends Controller
                   ->orWhere('body', 'like', "%{$search}%");
         }
         
-        $data = $query->paginate(2); // Adjust the number '10' to the number of items you want per page.
+        $data = $query->paginate(10); // Adjust the number '10' to the number of items you want per page.
         
         return view('news.news_list', ['data' => $data]);
     }
@@ -28,7 +28,6 @@ class NewsController extends Controller
     public function detail($id)
     {
         $data = Post::with('images')->find($id);
-        dd($data);
         return view('news.news_detail', ['data' => $data]);
     }
     public function create()
@@ -37,12 +36,7 @@ class NewsController extends Controller
     }
     public function store(Request $request)
     {
-        if ($request->hasFile('images')) {
-            dd("Hello");
-        }
-        else{
-            dd("No");
-        }
+        
   // Validate the incoming request data
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
@@ -68,13 +62,12 @@ class NewsController extends Controller
 
             // Process and save the images
             if ($request->hasFile('images')) {
-                dd("Hello");
                 foreach ($request->file('images') as $image) {
                     // Generate a unique name for the image
                     $imageName = time() . '_' . $image->getClientOriginalName();
 
                     // Store the image with the custom name
-                    $path = $image->storeAs('images', $imageName);
+                $path = $image->storeAs('news_images', $imageName, 'public');
 
                     // Create a new Image record and associate it with the post
                     $post->images()->create([
@@ -84,7 +77,13 @@ class NewsController extends Controller
                     ]);
                 }
             }
-            return back();
+            return redirect()->route('news#list')->with('success', 'News created successfully');
+    }
+    public function delete($id)
+    {
+        $data = Post::find($id);
+        $data->delete();
+        return redirect()->route('news#list')->with('success', 'News deleted successfully');
     }
 }
 

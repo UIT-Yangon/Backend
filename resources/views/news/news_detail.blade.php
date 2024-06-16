@@ -7,30 +7,19 @@
                 <h4 class='mb-3'>{{$data->type}}</h4>
                 <div class="d-flex justify-content-between mb-3">
                     <div>John Doe</div>
-                    <div class="bg-dark text-white p-1 rounded-3">12 Jan 2024</div>
+                    <div class=" text-white p-1 rounded-3" style="background-color: #3798A6">{{$data->created_at->format('j F Y')}}</div>
                 </div>
                 <hr>
                 <p>
                    {{$data->body}}
                 <div class="d-flex flex-wrap">
+                    @foreach ($data->images as $image)
                     <div class="w-50 bg-danger border-white " style="height:300px;border:3px solid white">
-                        <img src="https://e3.365dm.com/24/06/768x432/skynews-vladimir-putin-russia_6581336.jpg?20240614112324"
-                         class="w-100 h-100" alt="">
+                        <img src="{{ asset('storage/' . $image->name) }}" 
+                        class="w-100 h-100" alt="">
                     </div>
-                    <div class="w-50 bg-danger border-white " style="height:300px;border:3px solid white">
-                        <img src="https://e3.365dm.com/24/06/768x432/skynews-vladimir-putin-russia_6581336.jpg?20240614112324"
-                         class="w-100 h-100" alt="">
-                    </div>
-                    <div class="w-50 bg-danger border-white " style="height:300px;border:3px solid white">
-                        <img src="https://e3.365dm.com/24/06/768x432/skynews-vladimir-putin-russia_6581336.jpg?20240614112324"
-                         class="w-100 h-100" alt="">
-                    </div><div class="w-50 bg-danger border-white " style="height:300px;border:3px solid white">
-                        <img src="https://e3.365dm.com/24/06/768x432/skynews-vladimir-putin-russia_6581336.jpg?20240614112324"
-                         class="w-100 h-100" alt="">
-                    </div><div class="w-50 bg-danger border-white " style="height:300px;border:3px solid white">
-                        <img src="https://e3.365dm.com/24/06/768x432/skynews-vladimir-putin-russia_6581336.jpg?20240614112324"
-                         class="w-100 h-100" alt="">
-                    </div>
+                    @endforeach
+                   
                 </div>
 
                 <a href="{{route('news#editPage',3)}}" class="btn btn-dark p-3 mt-3">Edit News</a>
