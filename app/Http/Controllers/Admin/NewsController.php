@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Sub_News;
 use Illuminate\Support\Facades\Validator;
 
 class NewsController extends Controller
@@ -40,10 +41,9 @@ class NewsController extends Controller
   // Validate the incoming request data
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
-            'body' => 'required|string',
-            'user_id' => 'required|integer',
+            // 'user_id' => 'required|integer',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:10000', // Example validation rules for images
-        ]);
+        ])->validate();
 
         // Check if validation fails
         
@@ -59,6 +59,7 @@ class NewsController extends Controller
             $post->type = $request->type;
             $post->user_id = '1';
             $post->save();
+        
 
             // Process and save the images
             if ($request->hasFile('images')) {
@@ -77,6 +78,7 @@ class NewsController extends Controller
                     ]);
                 }
             }
+          
             return redirect()->route('news#list')->with('success', 'News created successfully');
     }
     public function delete($id)
@@ -84,6 +86,11 @@ class NewsController extends Controller
         $data = Post::find($id);
         $data->delete();
         return redirect()->route('news#list')->with('success', 'News deleted successfully');
+    }
+    public function back()
+    {
+        Sub_News::where('postId', '0')->delete();
+        return redirect()->route('news#list');
     }
 }
 

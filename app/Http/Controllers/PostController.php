@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Sub_News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\QueryException;
@@ -122,6 +123,7 @@ class PostController extends Controller
     
         // If not cached, fetch the post from the database
         $post = Post::with('images')->find($id);
+        // dd($post->toArray());
     
         if (!$post) {
             return response()->json(['message' => 'Post not found'], 404);
@@ -145,7 +147,7 @@ class PostController extends Controller
                 $headingImage = $imageData['name'];
             }
         }
-    
+        
         // Manually construct the response data
         $response = [
             'id' => $post->id,

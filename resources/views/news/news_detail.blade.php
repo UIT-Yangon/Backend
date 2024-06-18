@@ -11,7 +11,10 @@
                 </div>
                 <hr>
                 <p>
-                   {{$data->body}}
+                   {!! $data->body !!}
+                </p>
+                   
+                   
                 <div class="d-flex flex-wrap">
                     @foreach ($data->images as $image)
                     <div class="w-50 bg-danger border-white " style="height:300px;border:3px solid white">

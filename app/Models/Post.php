@@ -19,4 +19,8 @@ class Post extends Model
     {
         return $this->hasMany(NewsImage::class);
     }
+    public function sub_news()
+    {
+        return $this->hasMany(Sub_News::class);
+    }
 }
