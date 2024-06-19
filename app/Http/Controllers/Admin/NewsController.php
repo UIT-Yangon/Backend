@@ -20,7 +20,7 @@ class NewsController extends Controller
                   ->orWhere('body', 'like', "%{$search}%");
         }
         
-        $data = $query->paginate(10); // Adjust the number '10' to the number of items you want per page.
+        $data = $query->orderBy('created_at','asc')->paginate(10); // Adjust the number '10' to the number of items you want per page.
         
         return view('news.news_list', ['data' => $data]);
     }
