@@ -87,10 +87,6 @@ class NewsController extends Controller
         $data->delete();
         return redirect()->route('news#list')->with('success', 'News deleted successfully');
     }
-    public function back()
-    {
-        Sub_News::where('postId', '0')->delete();
-        return redirect()->route('news#list');
-    }
+    
 }
 
