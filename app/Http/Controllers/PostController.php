@@ -15,48 +15,62 @@ class PostController extends Controller
     
 
     public function index(Request $request)
-    {
-        // Define a cache key based on the request parameters
-        $cacheKey = 'posts_' . serialize($request->all());
+{
+    // Define a cache key based on the request parameters
+    $cacheKey = 'posts_' . serialize($request->all());
 
-        // Check if the data is already cached
-        if (Cache::has($cacheKey)) {
-            // If cached, retrieve and return the cached data
-            $posts = Cache::get($cacheKey);
-        } else {
-            // If not cached, fetch the posts from the database
-            $sortBy = $request->query('sort_by', 'created_at');
-            $sortDir = $request->query('sort_dir', 'desc');
-            $adminId = $request->query('admin_id');
-            $startDate = $request->query('start_date');
-            $endDate = $request->query('end_date');
-            $searchQuery = $request->query('search');
-            $perPage = $request->query('per_page', 10); // Default per page is 10
+    // Check if the data is already cached
+    if (Cache::has($cacheKey)) {
+        // If cached, retrieve and return the cached data
+        $posts = Cache::get($cacheKey);
+    } else {
+        // If not cached, fetch the posts from the database
+        $sortBy = $request->query('sort_by', 'created_at');
+        $sortDir = $request->query('sort_dir', 'desc');
+        $adminId = $request->query('admin_id');
+        $startDate = $request->query('start_date');
+        $endDate = $request->query('end_date');
+        $searchQuery = $request->query('search');
 
-            $query = Post::orderBy($sortBy, $sortDir);
+        $query = Post::with('images')->orderBy($sortBy, $sortDir);
 
-            if ($adminId) {
-                $query->where('admin_id', $adminId);
-            }
-            if ($startDate && $endDate) {
-                $query->whereBetween('created_at', [$startDate, $endDate]);
-            }
-            if ($searchQuery) {
-                $query->where(function ($q) use ($searchQuery) {
-                    $q->where('title', 'like', '%' . $searchQuery . '%')
-                        ->orWhere('body', 'like', '%' . $searchQuery . '%');
-                });
-            }
-
-            $posts = $query->paginate($perPage);
-
-            // Cache the fetched posts for 60 minutes (adjust as needed)
-            Cache::put($cacheKey, $posts, 60); // Cache for 60 minutes
+        if ($adminId) {
+            $query->where('admin_id', $adminId);
+        }
+        if ($startDate && $endDate) {
+            $query->whereBetween('created_at', [$startDate, $endDate]);
+        }
+        if ($searchQuery) {
+            $query->where(function ($q) use ($searchQuery) {
+                $q->where('title', 'like', '%' . $searchQuery . '%')
+                    ->orWhere('body', 'like', '%' . $searchQuery . '%');
+            });
         }
 
-        // Return the response
-        return response()->json($posts);
+        $posts = $query->get();
+
+        // Cache the fetched posts for 60 minutes (adjust as needed)
+        Cache::put($cacheKey, $posts, 60); // Cache for 60 minutes
     }
+
+    // Modify the posts to include only the first landscape image
+    $modifiedPosts = $posts->map(function($post) {
+        $firstLandscapeImage = $post->images->firstWhere('type', 'landscape');
+        return [
+            'id' => $post->id,
+            'title' => $post->title,
+            'body' => $post->body,
+            'type' => $post->type,
+            'created_at' => $post->created_at,
+            'updated_at' => $post->updated_at,
+            'image' => $firstLandscapeImage ? $firstLandscapeImage->name : null,
+        ];
+    });
+
+    // Return the modified response
+    return response()->json($modifiedPosts);
+}
+
 
     public function store(Request $request)
     {
