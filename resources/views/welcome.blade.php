@@ -120,6 +120,15 @@
           </li>
   
           <li class="nav-item menu-items">
+            <a class="nav-link1 nav-link" href="{{route('conf#list')}}">
+              <span class="menu-icon icon-bg">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+              <span class="menu-title text">Conferences</span>
+            </a>
+          </li>
+
+          <li class="nav-item menu-items">
             <a class="nav-link1 nav-link" href="pages/forms/basic_elements.html">
               <span class="menu-icon icon-bg">
                 <i class="mdi mdi-playlist-play"></i>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ConferenceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\NewsController;
 
@@ -26,4 +27,10 @@ Route::prefix('/news')->group(function(){
     Route::get('/edit/{id}',[NewsController::class,'editPage'])->name('news#editPage');
     Route::get('/delete/{id}',[NewsController::class,'delete'])->name('news#deletePage');
     Route::get('/back',[NewsController::class, 'Back'])->name('news#back');
+});
+
+Route::prefix('/conference')->group(function(){
+    Route::get('/list',[ConferenceController::class, 'list'])->name('conf#list');
+    Route::get('/detail/{id}',[ConferenceController::class,'detail'])->name('conf#detailPage');
+    Route::get('/delete/{id}',[ConferenceController::class,'delete'])->name('conf#deletePage');
 });
