@@ -20,7 +20,7 @@ class NewsController extends Controller
                   ->orWhere('body', 'like', "%{$search}%");
         }
         
-        $data = $query->paginate(10); // Adjust the number '10' to the number of items you want per page.
+        $data = $query->orderBy('created_at','asc')->paginate(10); // Adjust the number '10' to the number of items you want per page.
         
         return view('news.news_list', ['data' => $data]);
     }
@@ -87,10 +87,6 @@ class NewsController extends Controller
         $data->delete();
         return redirect()->route('news#list')->with('success', 'News deleted successfully');
     }
-    public function back()
-    {
-        Sub_News::where('postId', '0')->delete();
-        return redirect()->route('news#list');
-    }
+    
 }
 

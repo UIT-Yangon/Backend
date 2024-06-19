@@ -17,9 +17,9 @@
                    
                 <div class="d-flex flex-wrap">
                     @foreach ($data->images as $image)
-                    <div class="w-50 bg-danger border-white " style="height:300px;border:3px solid white">
+                    <div class="w-50 p-2 border-white " >
                         <img src="{{ asset('storage/' . $image->name) }}" 
-                        class="w-100 h-100" alt="">
+                        class="w-100 h" alt="">
                     </div>
                     @endforeach
                    

@@ -60,9 +60,9 @@
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color: #3798A6; border-right: 2px solid white">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top logo-box" style="background-color: #3798A6; ">
-          <img src="assets/images/UIT-Logo-big.png" alt="" class="logo-img">
-          <a class=" text-white logo" href="index.html"><h2>UIT Admin</h2></a>
-          <a class="sidebar-brand brand-logo-mini" href="index.html" >A</a>
+          <img src="{{asset('assets/images/UIT-Logo-big.png')}}" alt="" class="logo-img">
+          <a class=" text-white logo" href="#"><h2>UIT Admin</h2></a>
+          {{-- <a class="sidebar-brand brand-logo-mini" href="index.html" >A</a> --}}
         </div>
         <ul class="nav">
           <li class="nav-item profile">
@@ -144,7 +144,7 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar p-0 fixed-top d-flex flex-row" style="background-color: #3798A6; border-bottom: 2px solid white !important">
           <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+            {{-- <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a> --}}
           </div>
           <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
             <ul class="navbar-nav navbar-nav-right">
@@ -282,9 +282,9 @@
     <!-- plugins:js -->
     <script src="{{asset('assets/vendors/js/vendor.bundle.base.js')}}"></script>
     <script src="{{asset('assets/js/off-canvas.js')}}"></script>
-    <script src="{{asset('assets/js/hoverable-collapse.js')}}"></script>
-    <script src="{{asset('assets/js/misc.js')}}"></script>
-    <script src="{{asset('assets/js/settings.js')}}"></script>
+    {{-- <script src="{{asset('assets/js/hoverable-collapse.js')}}"></script> --}}
+    {{-- <script src="{{asset('assets/js/misc.js')}}"></script> --}}
+    {{-- <script src="{{asset('assets/js/settings.js')}}"></script> --}}
     <script src="{{asset('assets/js/todolist.js')}}"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
