@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->longText('body');
+            $table->longText('body')->nullable();
             $table->string('type');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->dateTime('deleted_at')->nullable();

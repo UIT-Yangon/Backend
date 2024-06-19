@@ -72,57 +72,57 @@ class PostController extends Controller
 }
 
 
-    public function store(Request $request)
-    {
-        // Validate the incoming request data
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string',
-            'body' => 'required|string',
-            'user_id' => 'required|integer',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:10000', // Example validation rules for images
-        ]);
+    // public function store(Request $request)
+    // {
+    //     // Validate the incoming request data
+    //     $validator = Validator::make($request->all(), [
+    //         'title' => 'required|string',
+    //         'body' => 'required|string',
+    //         'user_id' => 'required|integer',
+    //         'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:10000', // Example validation rules for images
+    //     ]);
 
-        // Check if validation fails
-        if ($validator->fails()) {
-            // Return a JSON response with validation errors and status code 422
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
+    //     // Check if validation fails
+    //     if ($validator->fails()) {
+    //         // Return a JSON response with validation errors and status code 422
+    //         return response()->json(['errors' => $validator->errors()], 422);
+    //     }
 
-        try {
+    //     try {
 
-            // Validation passed, proceed with creating the post
-            // Create a new post
-            $post = new Post();
+    //         // Validation passed, proceed with creating the post
+    //         // Create a new post
+    //         $post = new Post();
 
-            $post->title = $request->title;
-            $post->body = $request->body;
-            $post->user_id = $request->user_id;
-            $post->save();
+    //         $post->title = $request->title;
+    //         $post->body = $request->body;
+    //         $post->user_id = $request->user_id;
+    //         $post->save();
 
-            // Process and save the images
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $image) {
-                    // Generate a unique name for the image
-                    $imageName = time() . '_' . $image->getClientOriginalName();
+    //         // Process and save the images
+    //         if ($request->hasFile('images')) {
+    //             foreach ($request->file('images') as $image) {
+    //                 // Generate a unique name for the image
+    //                 $imageName = time() . '_' . $image->getClientOriginalName();
 
-                    // Store the image with the custom name
-                    $path = $image->storeAs('images', $imageName);
+    //                 // Store the image with the custom name
+    //                 $path = $image->storeAs('images', $imageName);
 
-                    // Create a new Image record and associate it with the post
-                    $post->images()->create([
-                        'name' => $path,
-                        // Add more image properties as needed
-                    ]);
-                }
-            }
+    //                 // Create a new Image record and associate it with the post
+    //                 $post->images()->create([
+    //                     'name' => $path,
+    //                     // Add more image properties as needed
+    //                 ]);
+    //             }
+    //         }
 
-            // Return a JSON response with a success message and status code 201
-            return response()->json(['message' => 'Post created successfully'], 201);
-        } catch (QueryException $e) {
-            // Return a JSON response with an error message if creating the post fails
-            return response()->json(['error' => 'Failed to create post'], 500);
-        }
-    }
+    //         // Return a JSON response with a success message and status code 201
+    //         return response()->json(['message' => 'Post created successfully'], 201);
+    //     } catch (QueryException $e) {
+    //         // Return a JSON response with an error message if creating the post fails
+    //         return response()->json(['error' => 'Failed to create post'], 500);
+    //     }
+    // }
 
     public function show($id)
     {

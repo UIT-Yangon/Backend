@@ -13,18 +13,18 @@ class NewsController extends Controller
     public function list(Request $request)
     {
         $query = Post::query();
-        
+
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where('title', 'like', "%{$search}%")
-                  ->orWhere('body', 'like', "%{$search}%");
+                ->orWhere('body', 'like', "%{$search}%");
         }
-        
-        $data = $query->orderBy('created_at','asc')->paginate(10); // Adjust the number '10' to the number of items you want per page.
-        
+
+        $data = $query->orderBy('created_at', 'asc')->paginate(10); // Adjust the number '10' to the number of items you want per page.
+
         return view('news.news_list', ['data' => $data]);
     }
-    
+
 
     public function detail($id)
     {
@@ -37,8 +37,8 @@ class NewsController extends Controller
     }
     public function store(Request $request)
     {
-        
-  // Validate the incoming request data
+
+        // Validate the incoming request data
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             // 'user_id' => 'required|integer',
@@ -46,40 +46,46 @@ class NewsController extends Controller
         ])->validate();
 
         // Check if validation fails
-        
 
-        
 
-            // Validation passed, proceed with creating the post
-            // Create a new post
-            $post = new Post();
 
-            $post->title = $request->title;
-            $post->body = $request->body;
-            $post->type = $request->type;
-            $post->user_id = '1';
-            $post->save();
-        
 
-            // Process and save the images
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $image) {
-                    // Generate a unique name for the image
-                    $imageName = time() . '_' . $image->getClientOriginalName();
+        // Validation passed, proceed with creating the post
+        // Create a new post
+        $post = new Post();
 
-                    // Store the image with the custom name
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->type = $request->type;
+        $post->user_id = '1';
+        $post->save();
+
+
+        // Process and save the images
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                list($width, $height) = getimagesize($image);
+                // Determine the orientation
+                $orientation = $width > $height ? 'landscape' : 'portrait';
+                // Generate a unique name for the image
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                // $imageName = now()->format('YmdHis') . "_{$orientation}_" . $image->getClientOriginalName();
+
+                // Store the image with the custom name
                 $path = $image->storeAs('news_images', $imageName, 'public');
 
-                    // Create a new Image record and associate it with the post
-                    $post->images()->create([
-                        'name' => $path,
-                        'post_id' => $post->id,
-                        // Add more image properties as needed
-                    ]);
-                }
+                // Create a new Image record and associate it with the post
+                $post->images()->create([
+                    'name' => $path,
+                    'post_id' => $post->id,
+                    'type' => $orientation
+                    // Add more image properties as needed
+                ]);
             }
-          
-            return redirect()->route('news#list')->with('success', 'News created successfully');
+        }
+
+
+        return redirect()->route('news#list')->with('success', 'News created successfully');
     }
     public function delete($id)
     {
@@ -87,6 +93,4 @@ class NewsController extends Controller
         $data->delete();
         return redirect()->route('news#list')->with('success', 'News deleted successfully');
     }
-    
 }
-

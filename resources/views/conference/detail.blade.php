@@ -60,7 +60,7 @@
         <td style="border: 1px solid white;padding:2px;">Member Type</td>
         <td style="border: 1px solid white;padding:2px;">Chair Type</td>
     </tr>
-
+    
     @foreach($members as $member)
     <tr style="background-color: #3798A6;">
         <td style="border: 1px solid white;padding:2px;">{{$member->id}}</td>
@@ -77,9 +77,11 @@
 </table>
 
 <h2 class="text-dark mt-5">Images Used</h2>
+@if($images)
 @foreach($images as $i)
     <div class="text-dark">{{$i->name}}</div>
     <!-- <img src="{{$i->name}}" style="width: 300px;height:300px;"/> -->
     <img src="https://www.uit.edu.mm/wp-content/uploads/2020/04/Blooddonar13-600x400.jpg" style="width: 300px;height:300px;"/>
 @endforeach
+@endif
 @endsection

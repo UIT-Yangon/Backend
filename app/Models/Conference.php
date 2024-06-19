@@ -30,10 +30,10 @@ class Conference extends Model
         return $this->hasMany(CommitteMember::class);
     }
 
-    public function conference_image()
-    {
-        return $this->hasMany(ConferenceImage::class);
-    }
+    // public function conference_image()
+    // {
+    //     return $this->hasMany(ConferenceImage::class);
+    // }
 
 
 

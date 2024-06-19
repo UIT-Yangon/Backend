@@ -27,7 +27,7 @@ class ConferenceController extends Controller
     public function delete($id)
     {
         CommitteMember::where('conference_id',$id)->delete();
-        ConferenceImage::where('conference_id',$id)->delete();
+        // ConferenceImage::where('conference_id',$id)->delete();
         Conference::where('id',$id)->delete();
 
         return redirect()->route('conf#list')->with('success', 'Conference deleted successfully');
