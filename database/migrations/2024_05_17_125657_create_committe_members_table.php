@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('committe_members', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('rank');
+            $table->string('rank')->nullable();
             $table->string('position')->nullable();
             $table->string('image')->nullable();
             $table->foreignId('conference_id')->constrained();

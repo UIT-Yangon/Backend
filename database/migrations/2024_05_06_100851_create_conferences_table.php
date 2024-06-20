@@ -24,10 +24,10 @@ return new class extends Migration
             $table->string('brochure')->nullable();
             $table->bigInteger('local_fee');
             $table->bigInteger('foreign_fee');
-            $table->date('conference_date');
+            $table->date('conference_date')->nullable();
             $table->string('paper_format');
             $table->json('topics');
-            
+            $table->date('camera_ready')->nullable();
             $table->string('images');
             $table->timestamps();
         });
