@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ConferenceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\AdminAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,8 @@ use App\Http\Controllers\Admin\NewsController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
 
 Route::prefix('/news')->group(function(){
     Route::get('/list',[NewsController::class,'list'])->name('news#list');
@@ -38,3 +40,9 @@ Route::prefix('/conference')->group(function(){
     Route::get('/edit/member/{id}',[ConferenceController::class,'editMemberPage'])->name('conf#editMemberPage');
     Route::post('/edit/member/{id}',[ConferenceController::class,'editMember'])->name('conf#editMember');
 });
+
+Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin#login');
+
+Route::get('admin/register', [AdminAuthController::class, 'showRegisterForm'])->name('register');
+Route::post('admin/register', [AdminAuthController::class, 'register'])->name('admin#register');
