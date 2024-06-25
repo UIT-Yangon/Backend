@@ -32,5 +32,9 @@ Route::prefix('/news')->group(function(){
 Route::prefix('/conference')->group(function(){
     Route::get('/list',[ConferenceController::class, 'list'])->name('conf#list');
     Route::get('/detail/{id}',[ConferenceController::class,'detail'])->name('conf#detailPage');
+    Route::get('/commitee/{id}/{type}',[ConferenceController::class,'commitee'])->name('conf#commiteePage');
     Route::get('/delete/{id}',[ConferenceController::class,'delete'])->name('conf#deletePage');
+    Route::get('/delete/member/{id}',[ConferenceController::class,'deleteMember'])->name('conf#deleteMember');
+    Route::get('/edit/member/{id}',[ConferenceController::class,'editMemberPage'])->name('conf#editMemberPage');
+    Route::post('/edit/member/{id}',[ConferenceController::class,'editMember'])->name('conf#editMember');
 });

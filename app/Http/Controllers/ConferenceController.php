@@ -98,7 +98,7 @@ class ConferenceController extends Controller
                 else if($member->rank){
                 $formattedMember = [
                     $memberImage,
-                    "{$member->name}, {$member->rank}, {$member->university} {$member->nation}"
+                    "{$member->rank} {$member->name},  {$member->university} {$member->nation}"
                 ];
                 }
                 else if($member->position){
