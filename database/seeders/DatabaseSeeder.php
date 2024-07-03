@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Post;
 use App\Models\Conference;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,10 +18,11 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         // Post::factory(10)->create();
-        Conference::factory(10)->create();
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Conference::factory(10)->create();
+        \App\Models\User::factory()->create([
+            'username' => 'admin',
+            'email' => 'admin@example.com',
+            'password'=>Hash::make('password'),
+        ]);
     }
 }

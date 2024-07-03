@@ -29,6 +29,8 @@ Route::prefix('/news')->group(function(){
     Route::get('/edit/{id}',[NewsController::class,'editPage'])->name('news#editPage');
     Route::get('/delete/{id}',[NewsController::class,'delete'])->name('news#deletePage');
     Route::get('/back',[NewsController::class, 'Back'])->name('news#back');
+    Route::post('/update',[NewsController::class, 'update'])->name('news#update');
+    Route::get('/delete/image/{id}',[NewsController::class, 'deleteImage'])->name('news#deleteImage');
 });
 
 Route::prefix('/conference')->group(function(){
