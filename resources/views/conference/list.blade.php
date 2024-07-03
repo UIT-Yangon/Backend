@@ -21,7 +21,7 @@
 
                         <div class="d-flex justify-content-between">
 
-                          <a href="{{route('news#create')}}" class="btn" style="background-color: #3798A6; padding-top:10px">+ Add</a>
+                          <a href="{{route('conf#createPage')}}" class="btn" style="background-color: #3798A6; padding-top:10px">+ Add</a>
 
                         <div >
                           <form method="GET" class="d-flex" action="{{ route('news#list') }}">

@@ -40,7 +40,7 @@ class AdminAuthController extends Controller
         }
 
         // If successful, then redirect to the welcome page
-        return redirect()->route('welcome');
+        return redirect()->route('news#list');
 
     }
 

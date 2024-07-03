@@ -14,15 +14,21 @@
                         </button>
                       </div>
                     @endif
-                <form action="{{ route('conf#commiteePage', [$id, $type]) }}" method="get" class="mb-3">
-                    @csrf
-                    <div class="d-flex w-50">
-                        <input type="text" class="form-control form-control-sm bg-white w-100 text-black"
-                            style="border: 1px sodivd #3798A6" placeholder="Search..." name="search">
-                        <button class="btn" style="background-color: #3798A6">Search</button>
+                    <div class="d-flex justify-content-between">
+                        <form action="{{ route('conf#commiteePage', [$id, $type]) }}" method="get" class="mb-3">
+                            @csrf
+                            <div class="d-flex ">
+                                <input type="text" class="form-control form-control-sm bg-white w-100 text-black"
+                                    style="border: 1px sodivd #3798A6" placeholder="Search..." name="search">
+                                <button class="btn" style="background-color: #3798A6">Search</button>
+                            </div>
+        
+                        </form>
+                        <div>
+                            <a href="{{route('conf#addMemberPage',$id)}}" class="btn" style="background-color: #3798A6">Add member</a>
+                        </div>
                     </div>
-
-                </form>
+                
                 <h3 class="text-dark">
                     <u>{{ ucFirst($type) }} Committee</u>
                 </h3>
@@ -32,7 +38,7 @@
                         @if($member->position && $member->rank)
                         <div class="text-dark ">
                             <div class="d-flex justify-content-between">
-                                <div>{{ $member->rank }}, {{ $member->name }}, {{ $member->position }},
+                                <div>{{ $member->rank }} {{ $member->name }}, {{ $member->position }},
                                     {{ $member->university }}, {{ $member->nation }}</div>
                                 <div> <a href="{{route("conf#deleteMember",$member->id)}}" class="btn btn-sm text-danger"><i class="fa-solid fa-eraser"></i></a>
                                     <a href="{{route("conf#editMemberPage",$member->id)}}" class="btn btn-sm text-warning"><i class="fa-solid fa-pencil"></i></a>
@@ -55,7 +61,7 @@
                         @elseif(!$member->position)
                             <div class="text-dark ">
                                 <div class="d-flex justify-content-between">
-                                    <div>{{ $member->rank }}, {{ $member->name }}, {{ $member->university }},
+                                    <div>{{ $member->rank }} {{ $member->name }}, {{ $member->university }},
                                         {{ $member->nation }}</div>
                                     <div><a href="{{route("conf#deleteMember",$member->id)}}" class="btn btn-sm text-danger"><i class="fa-solid fa-eraser"></i></a>
                                         <a href="{{route("conf#editMemberPage",$member->id)}}" class="btn btn-sm text-warning"><i class="fa-solid fa-pencil"></i></a>

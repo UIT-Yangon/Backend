@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-6 offset-3">
-                <button onclick="window.history.go(-1)" class="btn " style="background-color: #3798A6">Back</button>
+                <button onclick="window.history.go(-2)" class="btn " style="background-color: #3798A6">Back</button>
                 @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>{{ session('success') }}</strong>

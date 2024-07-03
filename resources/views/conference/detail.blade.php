@@ -74,15 +74,46 @@
             <div class="col-10 offset-1">
                 <div>
                     <h4 class="" style="color:#3798A6">General Chair : </h4>
-                    <li class="text-black">{{$chair['general_chair']->rank}}. {{$chair['general_chair']->name}}, {{$chair['general_chair']->position}}, {{$chair['general_chair']->university}}, {{$chair['general_chair']->nation}}</li>
+                    <li class="text-black">{{$chair['general_chair']->rank}} {{$chair['general_chair']->name}}, {{$chair['general_chair']->position}}, {{$chair['general_chair']->university}}, {{$chair['general_chair']->nation}}
+                        <a href="{{route("conf#deleteMember",$chair['general_chair']->id)}}" class="btn  btn-sm text-danger"><i class="fa-solid fa-eraser"></i></a>
+                        <a href="{{route("conf#editMemberPage",$chair['general_chair']->id)}}" class=" ms-0 btn btn-sm text-warning"><i class="fa-solid fa-pencil"></i></a>
+                    
+                    </li>
                 </div>
                 <div class="mt-4">
                     <h4 class="" style="color:#3798A6">General Co-Chair : </h4>
-                    <li class="text-black">{{$chair['general_co_chair']->rank}}. {{$chair['general_co_chair']->name}}, {{$chair['general_co_chair']->position}}, {{$chair['general_co_chair']->university}}, {{$chair['general_co_chair']->nation}}</li>
+                    <li class="text-black">{{$chair['general_co_chair']->rank}} {{$chair['general_co_chair']->name}}, {{$chair['general_co_chair']->position}}, {{$chair['general_co_chair']->university}}, {{$chair['general_co_chair']->nation}}
+                        <a href="{{route("conf#deleteMember",$chair['general_co_chair']->id)}}" class="btn  btn-sm text-danger"><i class="fa-solid fa-eraser"></i></a>
+                        <a href="{{route("conf#editMemberPage",$chair['general_co_chair']->id)}}" class=" ms-0 btn btn-sm text-warning"><i class="fa-solid fa-pencil"></i></a>
+                    
+                    </li>
                 </div>
                 <div class="mt-4">
                     <h4 class="" style="color:#3798A6">Program Chair : </h4>
-                    <li class="text-black">{{$chair['program_chair']->rank}}. {{$chair['program_chair']->name}}, {{$chair['program_chair']->position}}, {{$chair['program_chair']->university}}, {{$chair['program_chair']->nation}}</li>
+                    <li class="text-black">{{$chair['program_chair']->rank}} {{$chair['program_chair']->name}}, {{$chair['program_chair']->position}}, {{$chair['program_chair']->university}}, {{$chair['program_chair']->nation}}
+                        <a href="{{route("conf#deleteMember",$chair['program_chair']->id)}}" class="btn  btn-sm text-danger"><i class="fa-solid fa-eraser"></i></a>
+                        <a href="{{route("conf#editMemberPage",$chair['program_chair']->id)}}" class=" ms-0 btn btn-sm text-warning"><i class="fa-solid fa-pencil"></i></a>
+                    
+                    </li>
+                </div>
+                <div class="mt-4">
+                    <h4 class="" style="color:#3798A6">Keynote Speaker </h4>
+                    @foreach ($keynote as $k)
+                    
+                    <li class="text-dark">{{$k->rank}} {{$k->name}}, {{$k->position}}, {{$k->university}}, {{$k->nation}}<a href="{{route("conf#deleteMember",$k->id)}}" class="btn  btn-sm text-danger"><i class="fa-solid fa-eraser"></i></a>
+                        <a href="{{route("conf#editMemberPage",$k->id)}}" class=" ms-0 btn btn-sm text-warning"><i class="fa-solid fa-pencil"></i></a>
+                    </li>
+                     
+                    @endforeach
+                </div>
+                <div class="mt-4">
+                    <h4 class="" style="color:#3798A6">Invited Speaker </h4>
+                    @foreach ($invited as $i)
+                    <li class="text-black">{{$i->rank}} {{$i->name}}, {{$i->position}}, {{$i->university}}, {{$i->nation}}
+                    <a href="{{route("conf#deleteMember",$i->id)}}" class="btn  btn-sm text-danger"><i class="fa-solid fa-eraser"></i></a>
+                        <a href="{{route("conf#editMemberPage",$i->id)}}" class=" ms-0 btn btn-sm text-warning"><i class="fa-solid fa-pencil"></i></a>
+                    </li>
+                    @endforeach
                 </div>
                 <a href="{{route('conf#commiteePage',[$conference[0]->id, 'organizing'])}}" class="btn mt-3" style="background-color: #3798A6">Organizing committee</a>
                 <a href="{{route('conf#commiteePage',[$conference[0]->id, 'program'])}}" class="btn mt-3" style="background-color: #3798A6">Program committee</a>

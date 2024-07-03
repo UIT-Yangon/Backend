@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('paper_format');
             $table->json('topics');
             $table->date('camera_ready')->nullable();
-            $table->string('images');
+            $table->string('images')->nullable();
             $table->timestamps();
         });
     }
