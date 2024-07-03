@@ -75,7 +75,7 @@
 
                 </div>
                 <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
+                  <h5 class="mb-0 font-weight-normal">{{auth()->user()->name}}</h5>
                   <span class="text">Admin</span>
                 </div>
               </div>
