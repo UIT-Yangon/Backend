@@ -18,13 +18,14 @@
                 <div class="d-flex flex-wrap">
                     @foreach ($data->images as $image)
                     <div class="w-50 p-2 border-white " >
-                        <img src="{{ asset('storage/' . $image->name) }}" 
-                        class="w-100 h" alt="">
+                        <img src="{{asset('/storage/'.$image->name)}}" 
+                        class="w-100 h" style="height: 300px;width:300px" alt="">
+                        {{'storage/' . $image->name}}
                     </div>
                     @endforeach
                    
                 </div>
 
-                <a href="{{route('news#editPage',3)}}" class="btn btn-dark p-3 mt-3">Edit News</a>
+                <a href="{{route('news#editPage',$data->id)}}" class="btn btn-dark p-3 mt-3">Edit News</a>
             </div>
 @endsection
