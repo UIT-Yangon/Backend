@@ -16,9 +16,6 @@ use App\Http\Controllers\Admin\AdminAuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
 
 
 Route::prefix('/news')->group(function(){
@@ -37,8 +34,25 @@ Route::prefix('/conference')->group(function(){
     Route::get('/delete/{id}',[ConferenceController::class,'delete'])->name('conf#deletePage');
 });
 
-Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
-Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin#login');
 
-Route::get('admin/register', [AdminAuthController::class, 'showRegisterForm'])->name('register');
-Route::post('admin/register', [AdminAuthController::class, 'register'])->name('admin#register');
+    Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin#login');
+    Route::get('/admin/register', [AdminAuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/admin/register', [AdminAuthController::class, 'register'])->name('admin#register');
+
+    Route::middleware(['auth', 'admin'])->group(function () {
+        Route::get('/', [AdminAuthController::class, 'showWelcome'])->name('welcome');
+        Route::get('/admin/changepassword',[AdminAuthController::class, 'showChangePasswordForm'])->name('changepassword');
+        Route::post('/admin/changepassword', [AdminAuthController::class, 'changePassword']) ->name('admin#changepassword');
+        Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout');
+    });
+    
+
+
+    
+    
+    
+
+    
+
+    

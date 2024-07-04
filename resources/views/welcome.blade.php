@@ -75,8 +75,10 @@
 
                 </div>
                 <div class="profile-name">
-                  <h5 class="mb-0 font-weight-normal">Henry Klein</h5>
+                @if(Auth::check())
+                  <h5 class="mb-0 font-weight-normal"> {{ Auth::user()->name }} </h5>
                   <span class="text">Admin</span>
+                @endif
                 </div>
               </div>
               <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical text"></i></a>
@@ -92,7 +94,7 @@
                   </div>
                 </a>
                 <div class="dropdown-divider bg-danger"></div>
-                <a href="#" class="dropdown-item preview-item">
+                <a href="{{ route('changepassword') }}" class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
                     <div class="preview-icon bg-dark rounded-circle " style="background-color: #3798A6 !important;">
                       <i class="mdi mdi-onepassword  text-white "></i>
@@ -220,25 +222,32 @@
                 <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
                   <div class="navbar-profile">
                     <img class="img-xs rounded-circle" src="{{asset('assets/images/faces/face15.jpg')}}" alt="">
-                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Admin</p>
+                    @if(Auth::check())
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">{{ Auth::user()->name }}</p>
+                    @endif
                     <i class="mdi mdi-menu-down d-none d-sm-block"></i>
                   </div>
                 </a>
                 <div class="menu dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
                   <h6 class="p-3 mb-0 bg-white" style="color: #3798A6;">Profile</h6>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item bg-white">
+                  <a class="dropdown-item preview-item bg-white" href="{{ route('changepassword') }}">
+                    
                     <div class="preview-thumbnail">
                       <div class="preview-icon  rounded-circle " style="background-color: #3798A6;">
                         <i class="mdi mdi-contacts " style="color: white;"></i>
                       </div>
                     </div>
                     <div class="preview-item-content">
-                      <p class="preview-subject mb-1">Profile</p>
+                      <p class="preview-subject mb-1">Change Password</p>
                     </div>
+                    
                   </a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item bg-white">
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                  </form>
+                  <a class="dropdown-item preview-item bg-white" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <div class="preview-thumbnail">
                       <div class="preview-icon  rounded-circle"  style="background-color: #3798A6;">
                         <i class="mdi mdi-logout " style="color: white;"></i>
