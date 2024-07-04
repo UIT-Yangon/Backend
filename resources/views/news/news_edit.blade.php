@@ -1,7 +1,7 @@
 @extends('welcome')
 
 @section('content')
-<div class="">
+<div class="container w-50 flex justify-content-center align-items-center" style="border:1px solid black;border-radius:5px">
                 <div class="text-black">
                   <div class="card-body">
                     <h4 class="card-title">Edit News</h4>
@@ -20,13 +20,13 @@
                         </select>
                       </div>
 
-                      <div class="w-50 p-2 border-white " >
+                      <div class="w-100 border-white " >
                       @foreach ($data->images as $image)
-                        <div class="w-50 p-2 border-white icontainer" >
+                        <div class="w-100 py-2 border-white icontainer" >
                             <img src="{{asset('/storage/'.$image->name)}}" 
-                            class="w-100 h" style="height: 300px;width:300px" alt="">
+                            class="w-100" style='height:300px' alt="">
                            
-                            <a href="{{route('news#deleteImage',$image->id)}}" class="dbtn"> Delete </a>
+                            <a href="{{route('news#deleteImage',$image->id)}}" class="dbtn"> <i class="fa-solid fa-trash"></i>&nbsp;Delete </a>
                         </div>
                     @endforeach
                     </div>

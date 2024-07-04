@@ -14,7 +14,12 @@
     transition: all .5s ease;
     cursor: pointer;
     text-decoration: none;
-    color:inherit;
+    color:white;
+}
+.dbtn:hover{
+    text-decoration: none;
+    scale: 1.1;
+    color:white;
 }
 
 .icontainer:hover > .dbtn{

@@ -225,4 +225,17 @@ class ConferenceController extends Controller
 
         return back()->with(['success' => 'Committee member added successfully']);
     }
+
+
+    // edit info of conf
+    public function editPage($id){
+        $conference = Conference::where('id', $id)->get();
+        // dd($conference->toArray());
+        return view('conference.edit_conf_info',compact('conference'));
+    }
+
+    public function updateInfo(Request $request){
+        dd($request);
+    }
 }
+

@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="text-dark w-100 px-3">
                                     <label for="" class="form-label text-dark">Conference date</label>
-                                <input type="text" class="form-control {{ $errors->has('conference_date') ? 'is-invalid' : '' }} bg-white text-dark" name="conference_date" style="border:1px solid #3798A6" >
+                                <input type="date" class="form-control {{ $errors->has('conference_date') ? 'is-invalid' : '' }} bg-white text-dark" name="conference_date" style="border:1px solid #3798A6" >
                                 @error('conference_date')
                                     <small class="text-danger">{{$message}}</small>
                                 @enderror

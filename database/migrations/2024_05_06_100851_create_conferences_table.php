@@ -26,7 +26,7 @@ return new class extends Migration
             $table->bigInteger('foreign_fee');
             $table->date('conference_date')->nullable();
             $table->string('paper_format');
-            $table->json('topics');
+            $table->json('topics')->nullable(true);
             $table->date('camera_ready')->nullable();
             $table->string('images')->nullable();
             $table->timestamps();

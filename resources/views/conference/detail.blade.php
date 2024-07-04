@@ -3,8 +3,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-8 offset-2 px-0">
+            <div class="col-8 offset-2 px-0 mb-3 d-flex justify-content-between">
                 <h3 class="text-black"> {{ $conference[0]->name }}</h3>
+                <div class="border d-flex justify-content-center align-items-center " style="border-radius: 2px;background-color:#3798A6">
+                <a href="{{route("conf#editPage",$conference[0]->id)}}" class=" ms-0 btn btn-sm text-warning"><i class="fa-solid fa-pencil"></i>Edit Infos</a>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -62,10 +65,12 @@
             <div class="col-8 offset-2">
                 <h3 class="text-dark m-3 mb-0"><u>Topics</u></h3>
                 <ul class="mt-0 bg-light">
-
-                    @foreach ($conference[0]->topics as $topic)
-                        <li class="text-dark ">{{ $topic }}</li>
-                    @endforeach
+                @if(isset($conference[0]->topics) )
+                    
+                                    @foreach ($conference[0]->topics as $topic)
+                                        <li class="text-dark ">{{ $topic }}</li>
+                                    @endforeach
+                @endif
                 </ul>
 
             </div>
