@@ -5,6 +5,20 @@
     align-items: center;
 }
 
+.con{
+
+}
+.deleteBtn{
+    opacity: 0;
+    border-radius: 5px;
+    transition: all .5s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color:white;
+}
+.con:hover > .deleteBtn{
+    opacity: 1;
+}
 .dbtn{
     position: absolute;
     background-color: red;

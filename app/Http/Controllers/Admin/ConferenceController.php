@@ -239,12 +239,74 @@ class ConferenceController extends Controller
     // edit info of conf
     public function editPage($id){
         $conference = Conference::where('id', $id)->get();
-        // dd($conference->toArray());
-        return view('conference.edit_conf_info',compact('conference'));
+        $topics = implode(', ', $conference[0]['topics']);
+
+        return view('conference.edit_conf_info',compact('conference','topics'));
     }
 
     public function updateInfo(Request $request){
-        dd($request);
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'paperCall' => 'required',
+            'status' => 'required',
+            'email' => 'required',
+            'local_fee' => 'required',
+            'foreign_fee' => 'required',
+            'paper_format' => '',
+        ]);
+        $bookPath = "";
+        $brochurePath = "";
+        $paperFormatPath = "";
+        $conference =  Conference::find($request->id);
+
+        if ($request->hasFile('book')) {
+            $bookFile = $request->file('book');
+            $bookPath = now()->format('YmdHis') . '_book_' . $bookFile->getClientOriginalName();
+            if ($conference->book) {
+                Storage::disk('public')->delete($conference->book);
+            }
+            $bookFile->storeAs('conference_files', $bookPath, 'public');
+        }
+        if($request->hasFile('brochure')) {
+            $brochureFile = $request->file('brochure');
+            $brochurePath = now()->format('YmdHis') . '_brochure_' . $brochureFile->getClientOriginalName();
+            if ($conference->brochure) {
+                Storage::disk('public')->delete($conference->brochure);
+            }
+            $brochureFile->storeAs('conference_files', $brochurePath, 'public');
+        }
+        if($request->hasFile('paper_format')) {
+           $paperFormatFile = $request->file('paper_format');
+            $paperFormatPath = now()->format('YmdHis') . '_paper_format_' . $paperFormatFile->getClientOriginalName();
+            if ($conference->paper_format) {
+                Storage::disk('public')->delete($conference->paper_format);
+            }
+            $paperFormatFile->storeAs('conference_files', $paperFormatPath, 'public');
+        }
+        $topics = [];
+        if($request->has('topics'))
+        {
+            $topics = explode(',', $request->topics);
+            
+        }
+        $conference->name = $request->name;
+        $conference->paperCall = $request->paperCall;
+        $conference->updated_deadline = $request->original_deadline;
+        $conference->status = $request->status;
+        $conference->accept_noti = $request->accept_noti;
+        $conference->email = $request->email;
+        $conference->book = $bookPath;
+        $conference->brochure = $brochurePath;
+        $conference->local_fee = $request->local_fee;
+        $conference->foreign_fee = $request->foreign_fee;
+        $conference->conference_date = $request->conference_date;
+        $conference->paper_format = $paperFormatPath;
+        $conference->camera_ready = $request->camera_ready;
+        $conference->topics = $topics;
+        $conference->save();
+
+        return back()->with('success', 'Conference updated successfully.');
+
     }
 
     public function addImage($id, Request $request)

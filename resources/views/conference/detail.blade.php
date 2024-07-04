@@ -6,7 +6,7 @@
             <div class="col-8 offset-2 px-0 mb-3 d-flex justify-content-between">
                 <h3 class="text-black"> {{ $conference[0]->name }}</h3>
                 <div class="border d-flex justify-content-center align-items-center " style="border-radius: 2px;background-color:#3798A6">
-                <a href="{{route("conf#editPage",$conference[0]->id)}}" class=" ms-0 btn btn-sm text-warning"><i class="fa-solid fa-pencil"></i>Edit Infos</a>
+                <a href="{{route("conf#editPage",$conference[0]->id)}}" class=" ms-0 btn btn-sm text-white">Edit</a>
                 </div>
             </div>
         </div>
@@ -160,7 +160,10 @@
     @if ($images)
         @foreach ($images as $i)
         {{-- <h2 class="text-dark">{{$i}}</h2> --}}
-           <img style="max-width: 500px" src="{{asset('storage/conference_images/' . $i)}}" alt="">
+           <div class="relative con" style="position:relative;max-width:500px">
+            <img style="width:100%;" src="{{asset('storage/conference_images/' . $i)}}" alt="">
+            <a href='{{route('conf#deleteImg')}}' class="bg-danger p-2 m-3 text-decoration-none top-0 deleteBtn" style="position:absolute; top:0;right:0;color:white;cursor:pointer;">Delete</a>
+           </div>
         @endforeach
     @endif
     <script>
