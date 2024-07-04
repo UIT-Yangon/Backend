@@ -72,6 +72,7 @@
         </div>
         <div class="row">
             <div class="col-10 offset-1">
+                @if ($chair['general_chair']!= null)
                 <div>
                     <h4 class="" style="color:#3798A6">General Chair : </h4>
                     <li class="text-black">{{$chair['general_chair']->rank}} {{$chair['general_chair']->name}}, {{$chair['general_chair']->position}}, {{$chair['general_chair']->university}}, {{$chair['general_chair']->nation}}
@@ -80,6 +81,8 @@
                     
                     </li>
                 </div>
+                @endif
+                @if ($chair['general_co_chair']!= null)
                 <div class="mt-4">
                     <h4 class="" style="color:#3798A6">General Co-Chair : </h4>
                     <li class="text-black">{{$chair['general_co_chair']->rank}} {{$chair['general_co_chair']->name}}, {{$chair['general_co_chair']->position}}, {{$chair['general_co_chair']->university}}, {{$chair['general_co_chair']->nation}}
@@ -88,6 +91,8 @@
                     
                     </li>
                 </div>
+                @endif
+                @if ($chair['program_chair']!= null)
                 <div class="mt-4">
                     <h4 class="" style="color:#3798A6">Program Chair : </h4>
                     <li class="text-black">{{$chair['program_chair']->rank}} {{$chair['program_chair']->name}}, {{$chair['program_chair']->position}}, {{$chair['program_chair']->university}}, {{$chair['program_chair']->nation}}
@@ -96,6 +101,8 @@
                     
                     </li>
                 </div>
+                @endif
+                @if ($keynote)
                 <div class="mt-4">
                     <h4 class="" style="color:#3798A6">Keynote Speaker </h4>
                     @foreach ($keynote as $k)
@@ -106,6 +113,8 @@
                      
                     @endforeach
                 </div>
+                @endif
+                @if ($invited)
                 <div class="mt-4">
                     <h4 class="" style="color:#3798A6">Invited Speaker </h4>
                     @foreach ($invited as $i)
@@ -115,6 +124,8 @@
                     </li>
                     @endforeach
                 </div>
+                @endif
+                
                 <a href="{{route('conf#commiteePage',[$conference[0]->id, 'organizing'])}}" class="btn mt-3" style="background-color: #3798A6">Organizing committee</a>
                 <a href="{{route('conf#commiteePage',[$conference[0]->id, 'program'])}}" class="btn mt-3" style="background-color: #3798A6">Program committee</a>
 
