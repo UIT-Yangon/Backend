@@ -48,6 +48,7 @@ Route::prefix('/conference')->group(function(){
     Route::post('/add/member/{id}',[ConferenceController::class,'addMember'])->name('conf#addMember');
     Route::get('/edit/conf/{id}',[ConferenceController::class,'editPage'])->name('conf#editPage');
     Route::post('/update',[ConferenceController::class,'updateInfo'])->name('conf#updateInfo');
+    Route::get('/delete/img/{id}/{name}',[ConferenceController::class,'deleteImg'])->name('conf#deleteImg');
 });
 
 Route::get('admin/login', [AdminAuthController::class, 'showLoginForm'])->name('login');

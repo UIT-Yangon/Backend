@@ -157,15 +157,17 @@
             </div>
         </div>
     </div>
-    @if ($images)
+    <div class="d-flex flex-wrap gap-3 justify-content-center w-full">
+        @if ($images)
         @foreach ($images as $i)
         {{-- <h2 class="text-dark">{{$i}}</h2> --}}
            <div class="relative con" style="position:relative;max-width:500px">
             <img style="width:100%;" src="{{asset('storage/conference_images/' . $i)}}" alt="">
-            <a href='{{route('conf#deleteImg')}}' class="bg-danger p-2 m-3 text-decoration-none top-0 deleteBtn" style="position:absolute; top:0;right:0;color:white;cursor:pointer;">Delete</a>
+            <a href='{{route('conf#deleteImg',[$conference[0]->id,$i])}}' class="bg-danger p-2 m-3 text-decoration-none top-0 deleteBtn" style="position:absolute; top:0;right:0;color:white;cursor:pointer;">Delete</a>
            </div>
         @endforeach
     @endif
+    </div>
     <script>
         document.getElementById('toggleFileInputBtn').addEventListener('click', function() {
         const fileInput = document.getElementById('fileInput');

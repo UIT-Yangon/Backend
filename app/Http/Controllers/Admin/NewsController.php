@@ -39,6 +39,7 @@ class NewsController extends Controller
     }
     public function store(Request $request)
     {
+        // dd($request->all());
 
         // Validate the incoming request data
         $validator = Validator::make($request->all(), [
@@ -98,15 +99,16 @@ class NewsController extends Controller
     }
 
     public function update(Request $request){
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
         ])->validate();
-        Post::where($request->id)->update([
-            'title' => $request->title,
-            'body'=>$request->body,
-            'type'=>$request->type,
-            'user_id'=>$request->user_id,
-        ]);
+        $id = $request->id;
+        $post = Post::find($request->id);
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->type = $request->type;
+        $post->save();
 
         $post = new Post();
         if ($request->hasFile('images')) {
@@ -122,9 +124,10 @@ class NewsController extends Controller
                 $path = $image->storeAs('news_images', $imageName, 'public');
 
                 // Create a new Image record and associate it with the post
-                $post->images()->create([
+                // dd($id);
+                NewsImage::create([
                     'name' => $path,
-                    'post_id' => $request->id,
+                    'post_id' => $id,
                     'type' => $orientation
                     // Add more image properties as needed
                 ]);

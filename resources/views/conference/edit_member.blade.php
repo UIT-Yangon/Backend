@@ -67,6 +67,40 @@
                         @enderror
                         </div>
                         <div class="mt-2">
+                            <label for="" class="form-label text-dark">Speaker Type</label>
+                            <select name="speaker_type" id=""  class="form-control {{ $errors->has('speaker_type') ? 'is-invalid' : '' }} bg-white text-dark" style="border:1px solid #3798A6">
+                                <option value="none" @if($member->speaker_type=='none') selected @endif>none</option>
+                                <option value="keynote"  @if($member->speaker_type=='keynote') selected @endif>Keynote</option>
+                                <option value="invited" @if($member->speaker_type=='invited') selected @endif>Invited</option>
+                            </select>
+                            @error('speaker_type')
+                                <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
+                        <div class="mt-2">
+                            <label for="" class="form-label text-dark">Member Type</label>
+                            <select name="member_type" id=""  class="form-control {{ $errors->has('member_type') ? 'is-invalid' : '' }} bg-white text-dark" style="border:1px solid #3798A6">
+                                <option value="none" @if($member->member_type == "none") selected @endif>none</option>
+                                <option value="organizing"  @if($member->member_type == "organizing") selected @endif>Organizing</option>
+                                <option value="committee" @if($member->member_type == "committee") selected @endif>Committee</option>
+                            </select>
+                            @error('member_type')
+                                <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
+                        <div class="mt-2">
+                            <label for="" class="form-label text-dark">Chair Type</label>
+                            <select name="chair_type" id=""  class="form-control {{ $errors->has('chair_type') ? 'is-invalid' : '' }} bg-white text-dark" style="border:1px solid #3798A6">
+                                <option value="none" >none</option>
+                                <option value="general chair"  @if($member->chair_type=='general chair') selected @endif>General Chair</option>
+                                <option value="general co-chair" @if($member->chair_type=='general co-chair') selected @endif>General Co-Chairr</option>
+                                <option value="program chair" @if($member->chair_type=='program chair') selected @endif>Program Chair</option>
+                            </select>
+                            @error('chair_type')
+                                <small class="text-danger">{{$message}}</small>
+                            @enderror
+                        </div>
+                        <div class="mt-2">
                             <button class="btn" style="background-color: #3798A6">Update</button>
                             <a href="#" class="btn" style="background-color: #3798A6">Back</a>
 

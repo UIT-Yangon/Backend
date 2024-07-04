@@ -13,7 +13,7 @@ class ConferenceController extends Controller
 {
     public function list()
     {
-        $conferences = Conference::paginate(1);
+        $conferences = Conference::paginate(10);
         // dd($conferences[0]->toArray(),$conferences[0]->committe_members->toArray(),$conferences[0]->conference_image->toArray());
         return view('conference.list', compact('conferences'));
     }
@@ -186,10 +186,35 @@ class ConferenceController extends Controller
         $member->university = $validatedData['university'];
         $member->position = $validatedData['position'];
         $member->nation = $validatedData['nation'];
+        $member->chair_type = $request->input('chair_type');
+        $member->member_type = $request->input('member_type');
+        $member->speaker_type = $request->input('speaker_type');
+
         $member->save();
 
         // Return a success response
         return back()->with(['success' => 'Committee member updated successfully']);
+    }
+
+    public function deleteImg($id,$name){
+        $member = Conference::where('id', $id)->first();
+        if ($member->images) {
+            $img = explode(',', $member->images);
+            $key = array_search($name, $img);
+
+            // If 'banana' is found in the array, remove it
+            if ($key !== false) {
+                unset($img[$key]);
+            }
+
+            // Re-index the array to maintain sequential keys
+            $img = array_values($img);
+            $images = implode(',', $img);
+            Storage::disk('public')->delete($name);
+            Conference::where('id', $id)->update(['images' => $images]);
+        }
+        
+        return back()->with(['success' => 'Committee member image deleted successfully']);
     }
 
     public function addMemberPage($id)
