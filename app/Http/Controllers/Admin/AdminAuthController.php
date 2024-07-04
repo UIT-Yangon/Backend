@@ -7,9 +7,26 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class AdminAuthController extends Controller
 {
+
+    
+
+    
+
+    public function showWelcome()
+    {
+        if (Auth::check() && Auth::user()->role == 'admin') {
+            $user = Auth::user();
+            return view('welcome', ['user' => $user]);
+        } else {
+            return redirect()->route('login')->withErrors(['You do not have admin access.']);
+        }
+    }
+
+
     public function showLoginForm()
     {
         return view('authentication.login');
@@ -18,6 +35,11 @@ class AdminAuthController extends Controller
     public function showRegisterForm()
     {
         return view('authentication.register');
+    }
+
+    public function showChangePasswordForm()
+    {
+        return view('authentication.changepassword');
     }
     /**
      * Handle an admin login request.
@@ -70,4 +92,49 @@ class AdminAuthController extends Controller
         // Redirect to login page with success message
         return redirect()->route('login')->with('success', 'Admin Registration Successful');
     }
+
+    public function changePassword(Request $request)
+    {
+
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Check if the current password matches the password in the database
+        if (!Hash::check($request->current_password, $user->password)) {
+            return redirect()->back()->with('error', 'The current password does not match.');
+        }
+
+        // Attempt to update the password
+        try {
+            User::where('id',$user->id)->update([
+                'password'=>Hash::make($request->new_password)
+            ]);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update password. Please try again.');
+        }
+
+        return redirect()->route('login')->with('success', 'Password updated successfully.');
+    }
+
+
+
+
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
+    }
+
+    
+
+    
 }

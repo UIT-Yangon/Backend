@@ -40,11 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'api' => [
-            'driver' => 'sanctum',
-            'provider' => 'users',
-            'hash' => false, // Whether to use hash tokens
-        ],
+        'admin' => [
+        'driver' => 'session',
+        'provider' => 'users',
+    ],
     ],
 
     /*
