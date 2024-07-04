@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->dateTime('deleted_at')->nullable();
             /// for activity
-            $table->dateTime('date');
+            $table->dateTime('date')->nullable(true);
             $table->timestamps();
         });
     }
