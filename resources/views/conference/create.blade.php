@@ -128,6 +128,10 @@
                                 </div>
                                 
                             </div>
+                            <div class="mt-2">
+                                <label for="" class="form-label text-dark">Topics</label>
+                                <textarea name="topics" id="" cols="30" rows="10" class="form-control bg-white text-dark" style="border:1px solid #3798A6"></textarea>
+                            </div>
                             {{--
                             <div class="mt-2">
                                 <label for="" class="form-label text-dark">Postion</label>

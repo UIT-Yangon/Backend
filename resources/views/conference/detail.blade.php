@@ -137,11 +137,44 @@
     
 
 
-    <h2 class="text-dark mt-5">Images Used</h2>
+    <div class="d-flex justify-content-between align-items-center mt-5">
+        <h2 class="text-dark ">Images Used</h2>
+        <button type="button"  class="btn btn-primary" id = "toggleFileInputBtn">Add image</button>
+    </div>
+    <div class="container " id = "fileInput" style="display: none;">
+        <div class="row">
+            <div class="col-6 offset-3">
+                <form action="{{route('conf#addImage',$conference[0]->id)}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="file" name="image"  class="form-control bg-white text-dark"  style=" border: 1px solid #3798A6">
+                    <button class="btn mt-3" style="background-color: #3798A6">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
     @if ($images)
         @foreach ($images as $i)
         {{-- <h2 class="text-dark">{{$i}}</h2> --}}
            <img style="max-width: 500px" src="{{asset('storage/conference_images/' . $i)}}" alt="">
         @endforeach
     @endif
+    <script>
+        document.getElementById('toggleFileInputBtn').addEventListener('click', function() {
+        const fileInput = document.getElementById('fileInput');
+        const button = document.getElementById('toggleFileInputBtn');
+
+        console.log(fileInput);
+        if (fileInput.style.display === 'none' || fileInput.style.display === '') {
+            fileInput.style.display = 'block';
+            button.textContent = 'Close';
+
+        } else {
+            fileInput.style.display = 'none';
+            button.textContent = 'Add image';
+
+        }
+    });
+    </script>
+    
+    
 @endsection

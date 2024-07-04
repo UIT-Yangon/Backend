@@ -33,6 +33,7 @@ class ConferenceController extends Controller
             'local_fee' => 'required',
             'foreign_fee' => 'required',
             'paper_format' => 'required',
+            ''
         ]);
         $bookPath = "";
         $brochurePath = "";
@@ -52,6 +53,12 @@ class ConferenceController extends Controller
             $paperFormatPath = now()->format('YmdHis') . '_paper_format_' . $paperFormatFile->getClientOriginalName();
             $paperFormatFile->storeAs('conference_files', $paperFormatPath, 'public');
         }
+        $topics = [];
+        if($request->has('topics'))
+        {
+            $topics = explode(',', $request->topics);
+            
+        }
         $conference = new Conference();
         $conference->name = $request->name;
         $conference->paperCall = $request->paperCall;
@@ -66,6 +73,7 @@ class ConferenceController extends Controller
         $conference->conference_date = $request->conference_date;
         $conference->paper_format = $paperFormatPath;
         $conference->camera_ready = $request->camera_ready;
+        $conference->topics = $topics;
         $conference->save();
         return back()->with('success', 'Conference created successfully.');
 
@@ -76,6 +84,7 @@ class ConferenceController extends Controller
         $keynote = [];
         $invited = [];
         $conference = Conference::where('id', $id)->get();
+        
         $members = $conference[0]->committe_members;
         $images = explode(',', $conference[0]->images);
         $chair = [
@@ -224,5 +233,20 @@ class ConferenceController extends Controller
         $member->save();
 
         return back()->with(['success' => 'Committee member added successfully']);
+    }
+
+    public function addImage($id, Request $request)
+    {
+        $conference = Conference::where('id', $id)->first();
+        $image = $conference->images;
+        if($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('conference_images', 'public');
+            $imageName = basename($imagePath);
+            $image .=  ','. $imageName;
+            $conference->images = $image;
+        }
+        $conference->save();
+        return back()->with(['success' => 'Image added successfully']);
+        
     }
 }
