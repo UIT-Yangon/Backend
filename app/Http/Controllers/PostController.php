@@ -137,16 +137,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        // Define cache key for the specific post
-        $cacheKey = 'post_' . $id;
-
-        // Check if the post data is already cached
-        if (Cache::has($cacheKey)) {
-            // If cached, retrieve and return the cached post data
-            return Cache::get($cacheKey);
-        }
-
-        // If not cached, fetch the post from the database
+      
         $post = Post::with('images')->find($id);
         // dd($post->toArray());
 
@@ -191,106 +182,16 @@ class PostController extends Controller
         ];
 
         // Cache the constructed response data for 60 minutes (adjust as needed)
-        Cache::put($cacheKey, $response, 60); // Cache for 60 minutes
 
         // Return the constructed response
         return response()->json($response);
     }
 
-
-
-
-    public function update(Request $request, $id)
+    public function cc($id)
     {
-        // Validate the incoming request data
-        $validator = Validator::make($request->all(), [
-            'title' => 'required|string',
-            'body' => 'required|string',
-            'user_id' => 'required|integer',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:10000', // Example validation rules for images
-        ]);
-
-        // Check if validation fails
-        if ($validator->fails()) {
-            // Return a JSON response with validation errors and status code 422
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        try {
-            // Find the post by ID
-            $post = Post::findOrFail($id);
-
-            // Update the post attributes
-            $post->title = $request->title;
-            $post->body = $request->body;
-            $post->user_id = $request->admin_id;
-            $post->save();
-
-            // Process and save the images
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $image) {
-                    // Generate a unique name for the image
-                    $imageName = time() . '_' . $image->getClientOriginalName();
-
-                    // Store the image with the custom name
-                    $path = $image->storeAs('images', $imageName);
-
-                    // Create a new Image record and associate it with the post
-                    $post->images()->create([
-                        'name' => $path,
-                        // Add more image properties as needed
-                    ]);
-                }
-            }
-
-            // Return a JSON response with a success message and status code 200
-            return response()->json(['message' => 'Post updated successfully'], 200);
-        } catch (QueryException $e) {
-            // Return a JSON response with an error message if updating the post fails
-            return response()->json(['error' => 'Failed to update post'], 500);
-        }
+        
     }
 
 
-    public function destroy($id)
-    {
-        try {
-            // Find the post by ID
-            $post = Post::findOrFail($id);
 
-            // Retrieve all images associated with the post
-            $images = $post->images;
-
-            // Delete the corresponding image files from storage
-            // foreach ($images as $image) {
-            //     Storage::delete($image->name);
-            // }
-
-            // Soft delete the post
-            $post->delete();
-
-            // Return a JSON response with a success message
-            return response()->json(['message' => 'Post and associated images deleted successfully'], 200);
-        } catch (\Exception $e) {
-            // Return a JSON response with an error message if deletion fails
-            return response()->json(['error' => 'Failed to delete post and associated images'], 500);
-        }
-    }
-    public function deleteImage($postId, $imageId)
-    {
-        try {
-            // Find the post by ID
-            $post = Post::findOrFail($postId);
-
-            // Find the image by ID and delete it
-            $image = $post->images()->findOrFail($imageId);
-            Storage::delete($image->name);
-
-            $image->delete();
-
-            return response()->json(['message' => 'Image deleted successfully'], 200);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Failed to delete image'], 500);
-        }
-    }
 }

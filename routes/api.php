@@ -16,7 +16,11 @@ Route::post('/login', [AdminAuthController::class, 'login']);
 Route::post('/register', [AdminAuthController::class, 'register']);
 
 Route::get('/posts/{type}', [PostController::class, 'index']);
-Route::get('/posts/{id}', [PostController::class, 'show']);
+// Route::get('/posts/{id}', function()
+// {
+//     dd('Hello');
+// });
+Route::get('/news/{id}',[PostController::class,'show']);
 
 Route::get('/staff', [StaffController::class, 'index']);
 Route::get('/staff/{id}', [StaffController::class, 'show']);
