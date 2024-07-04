@@ -34,6 +34,7 @@ Route::prefix('/news')->group(function(){
 });
 
 Route::prefix('/conference')->group(function(){
+    Route::post('/add/image/{id}',[ConferenceController::class,'addImage'])->name('conf#addImage');
     Route::get('/list',[ConferenceController::class, 'list'])->name('conf#list');
     Route::get('/create',[ConferenceController::class,'createPage'])->name('conf#createPage');
     Route::post('/create',[ConferenceController::class,'create'])->name('conf#create');

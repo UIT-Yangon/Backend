@@ -7,7 +7,9 @@
                 <h4 class='mb-3'>{{$data->type}}</h4>
                 <div class="d-flex justify-content-between mb-3">
                     <div>John Doe</div>
+                    @if($data->created_at)
                     <div class=" text-white p-1 rounded-3" style="background-color: #3798A6">{{$data->created_at->format('j F Y')}}</div>
+                    @endif
                 </div>
                 <hr>
                 <p>
