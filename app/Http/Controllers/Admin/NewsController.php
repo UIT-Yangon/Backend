@@ -55,10 +55,12 @@ class NewsController extends Controller
 
         // Validation passed, proceed with creating the post
         // Create a new post
+        $allowedTags = '<p><a><b><i><u><strong><em><br><ul><ol><li><h1><h2><h3><h4><h5><h6><blockquote><code><pre><img><table><thead><tbody><tr><th><td>';
+        $sanitizedBody = strip_tags($request->body, $allowedTags);
         $post = new Post();
 
         $post->title = $request->title;
-        $post->body = $request->body;
+        $post->body = $sanitizedBody;
         $post->type = $request->type;
         $post->user_id = '1';
         $post->save();
@@ -103,10 +105,14 @@ class NewsController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
         ])->validate();
+
+
         $id = $request->id;
+        $allowedTags = '<p><a><b><i><u><strong><em><br><ul><ol><li><h1><h2><h3><h4><h5><h6><blockquote><code><pre><img><table><thead><tbody><tr><th><td>';
+        $sanitizedBody = strip_tags($request->body, $allowedTags);
         $post = Post::find($request->id);
         $post->title = $request->title;
-        $post->body = $request->body;
+        $post->body = $sanitizedBody;
         $post->type = $request->type;
         $post->save();
 

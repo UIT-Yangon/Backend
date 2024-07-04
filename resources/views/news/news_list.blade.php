@@ -38,7 +38,7 @@
                                     <th style="background-color: #3798A6; color:white"> Title </th>
                                     <th style="background-color: #3798A6; color:white"> Type </th>
                                     <th style="background-color: #3798A6; color:white"> Actions </th>
-                                    <th style="background-color: #3798A6; color:white"> Created at </th>
+                                    <th style="background-color: #3798A6; color:white"> Date </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -47,7 +47,7 @@
                                         <td>{{ $d->id }}</td>
                                         <td>{{ $d->title }}</td>
                                         <td>
-                                            {{ $d->type }}
+                                           @if($d->type === "activities/calender")  activity  @else {{$d->type}} @endif
                                         </td>
                                         <td>
                                             <a href="{{ route('news#detailPage', $d->id) }}" class="btn  "
@@ -56,7 +56,7 @@
                                             <a href="{{ route('news#deletePage', $d->id) }}" class="btn btn-danger "><i
                                                     class="fa-solid fa-circle-info text-white"></i>Delete</a>
                                         </td>
-                                        <td> {{ $d->updated_at }}</td>
+                                        <td> {{ $d->date ? $d->date : $d->updated_at }}</td>
                                     </tr>
                                 @endforeach
 
