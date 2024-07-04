@@ -22,8 +22,10 @@
                       <div class="form-group">
                         <label for="exampleSelectGender">Type</label>
                         <select class="form-control border bg-white" name='type' id="exampleSelectGender">
-                          <option value="News"  {{$data->type=='News' ? 'selected' : ''}}>News</option>
-                          <option value="Announcement" {{$data->type=='Announcement' ? 'selected' : ''}} >Announcement</option>
+                          <option value="news"  {{$data->type=='news' ? 'selected' : ''}}>News</option>
+                          <option value="activities"  {{$data->type=='activities' ? 'selected' : ''}}>Activity</option>
+                          <option value="activities/calender"  {{$data->type=='activities/calender' ? 'selected' : ''}}>Activity/calender</option>
+                          <option value="announcement" {{$data->type=='Announcement' ? 'selected' : ''}} >Announcement</option>
                         </select>
                       </div>
 

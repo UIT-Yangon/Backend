@@ -26,8 +26,11 @@
                             <div class="form-group">
                                 <label for="exampleSelectGender" class="text-black">Type</label>
                                 <select class="form-control  bg-white" style="color:black !important; border:1px solid #3798A6 !important; "  id="exampleSelectGender" name="type">
-                                    <option>News</option>
-                                    <option>Announcement</option>
+                                    <option value="news">News</option>
+                                    <option value="activities">Activity</option>
+                                    <option value="activities/calender">Activity/Calender</option>
+
+                                    <option value="announcement">Announcement</option>
                                 </select>
                             </div>
                             <div class="form-group">

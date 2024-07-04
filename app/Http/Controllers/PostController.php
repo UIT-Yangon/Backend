@@ -12,64 +12,75 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
-    
 
-    public function index(Request $request)
-{
-    // Define a cache key based on the request parameters
-    $cacheKey = 'posts_' . serialize($request->all());
 
-    // Check if the data is already cached
-    if (Cache::has($cacheKey)) {
-        // If cached, retrieve and return the cached data
-        $posts = Cache::get($cacheKey);
-    } else {
-        // If not cached, fetch the posts from the database
-        $sortBy = $request->query('sort_by', 'created_at');
-        $sortDir = $request->query('sort_dir', 'desc');
-        $adminId = $request->query('admin_id');
-        $startDate = $request->query('start_date');
-        $endDate = $request->query('end_date');
-        $searchQuery = $request->query('search');
+    public function index(Request $request, $type)
+    {
+        $posts = '';
+        // Define a cache key based on the request parameters
 
-        $query = Post::with('images')->orderBy($sortBy, $sortDir);
+        // Check if the data is already cached
+       
+        
+            // If not cached, fetch the posts from the database
+            $sortBy = $request->query('sort_by', 'created_at');
+            $sortDir = $request->query('sort_dir', 'desc');
+            $adminId = $request->query('admin_id');
+            $startDate = $request->query('start_date');
+            $endDate = $request->query('end_date');
+            $searchQuery = $request->query('search');
 
-        if ($adminId) {
-            $query->where('admin_id', $adminId);
-        }
-        if ($startDate && $endDate) {
-            $query->whereBetween('created_at', [$startDate, $endDate]);
-        }
-        if ($searchQuery) {
-            $query->where(function ($q) use ($searchQuery) {
-                $q->where('title', 'like', '%' . $searchQuery . '%')
-                    ->orWhere('body', 'like', '%' . $searchQuery . '%');
-            });
-        }
+            $query = Post::with('images')->orderBy($sortBy, $sortDir);
 
-        $posts = $query->get();
+            if ($adminId) {
+                $query->where('admin_id', $adminId);
+            }
+            if ($startDate && $endDate) {
+                $query->whereBetween('created_at', [$startDate, $endDate]);
+            }
+            if ($searchQuery) {
+                $query->where(function ($q) use ($searchQuery) {
+                    $q->where('title', 'like', '%' . $searchQuery . '%')
+                        ->orWhere('body', 'like', '%' . $searchQuery . '%');
+                });
+            }
+            if($type === 'activities')
+            {
+                $posts = $query->where('type','activities')
+                                ->orWhere('type','activities/calender')
+                                ->get();
+            }
+            else if($type === 'calender')
+            {
+                $posts = $query->where('type','activities/calender')
+                                ->get();
+            }
+            else
+            {
+                $posts = $query->where('type',$type)->get();
+            }
 
-        // Cache the fetched posts for 60 minutes (adjust as needed)
-        Cache::put($cacheKey, $posts, 60); // Cache for 60 minutes
+
+        
+
+        // Modify the posts to include only the first landscape image
+        $modifiedPosts = $posts->map(function ($post) {
+            $firstLandscapeImage = $post->images->firstWhere('type', 'landscape');
+            return [
+                'id' => $post->id,
+                'title' => $post->title,
+                'body' => $post->body,
+                'type' => $post->type,
+                'date' => $post->date ? $post->date : null,
+                'created_at' => $post->created_at,
+                'updated_at' => $post->updated_at,
+                'image' => $firstLandscapeImage ? $firstLandscapeImage->name : null,
+            ];
+        });
+
+        // Return the modified response
+        return response()->json($modifiedPosts);
     }
-
-    // Modify the posts to include only the first landscape image
-    $modifiedPosts = $posts->map(function($post) {
-        $firstLandscapeImage = $post->images->firstWhere('type', 'landscape');
-        return [
-            'id' => $post->id,
-            'title' => $post->title,
-            'body' => $post->body,
-            'type' => $post->type,
-            'created_at' => $post->created_at,
-            'updated_at' => $post->updated_at,
-            'image' => $firstLandscapeImage ? $firstLandscapeImage->name : null,
-        ];
-    });
-
-    // Return the modified response
-    return response()->json($modifiedPosts);
-}
 
 
     // public function store(Request $request)
@@ -128,26 +139,26 @@ class PostController extends Controller
     {
         // Define cache key for the specific post
         $cacheKey = 'post_' . $id;
-    
+
         // Check if the post data is already cached
         if (Cache::has($cacheKey)) {
             // If cached, retrieve and return the cached post data
             return Cache::get($cacheKey);
         }
-    
+
         // If not cached, fetch the post from the database
         $post = Post::with('images')->find($id);
         // dd($post->toArray());
-    
+
         if (!$post) {
             return response()->json(['message' => 'Post not found'], 404);
         }
-    
+
         // Separate images into landscape and portrait arrays and find the heading image
         $landscapeImages = [];
         $portraitImages = [];
         $headingImage = null;
-    
+
         foreach ($post->images as $image) {
             $imageData = [
                 'name' => $image->name,
@@ -161,7 +172,7 @@ class PostController extends Controller
                 $headingImage = $imageData['name'];
             }
         }
-        
+
         // Manually construct the response data
         $response = [
             'id' => $post->id,
@@ -178,14 +189,14 @@ class PostController extends Controller
                 'portrait' => $portraitImages,
             ],
         ];
-    
+
         // Cache the constructed response data for 60 minutes (adjust as needed)
         Cache::put($cacheKey, $response, 60); // Cache for 60 minutes
-    
+
         // Return the constructed response
         return response()->json($response);
     }
-    
+
 
 
 
