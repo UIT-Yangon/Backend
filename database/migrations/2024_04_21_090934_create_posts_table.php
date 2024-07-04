@@ -16,8 +16,11 @@ return new class extends Migration
             $table->string('title');
             $table->longText('body')->nullable();
             $table->string('type');
+            
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->dateTime('deleted_at')->nullable();
+            /// for activity
+            $table->dateTime('date')->nullable(true);
             $table->timestamps();
         });
     }

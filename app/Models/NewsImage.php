@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class NewsImage extends Model
 {
     use HasFactory;
-    protected $fillable=['name','type'];
+    protected $fillable=['name','type','post_id'];
     public function post()
     {
         $this->belongsTo(Post::class);

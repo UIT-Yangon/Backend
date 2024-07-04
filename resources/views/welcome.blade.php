@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('assets/vendors/css/vendor.bundle.base.css')}}">
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/img.css')}}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
@@ -75,8 +76,12 @@
 
                 </div>
                 <div class="profile-name">
+<<<<<<< HEAD
                 @if(Auth::check())
                   <h5 class="mb-0 font-weight-normal"> {{ Auth::user()->name }} </h5>
+=======
+                  <h5 class="mb-0 font-weight-normal">user name here</h5>
+>>>>>>> origin/main
                   <span class="text">Admin</span>
                 @endif
                 </div>

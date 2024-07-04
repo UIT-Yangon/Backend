@@ -32,7 +32,7 @@ class ConferenceController extends Controller
             $perPage = $request->query('per_page', 10); // Default per page is 10
 
             $query = Conference::select("id", "name")->orderBy($sortBy, $sortDir);
-            $conf = $query->paginate($perPage);
+            $conf = $query->get();
 
             // Cache the fetched posts for 60 minutes (adjust as needed)
             Cache::put($cacheKey, $conf, 60); // Cache for 60 minutes
@@ -89,10 +89,30 @@ class ConferenceController extends Controller
                 $memberImage = $member->image_name ?? 'default.jpg'; // Replace 'default.jpg' with your default image
 
                 // Format the member's details
+                if($member->rank && $member->position){
                 $formattedMember = [
                     $memberImage,
                     "{$member->rank}.{$member->name}, {$member->position}, {$member->university} {$member->nation}"
                 ];
+                }
+                else if($member->rank){
+                $formattedMember = [
+                    $memberImage,
+                    "{$member->rank} {$member->name},  {$member->university} {$member->nation}"
+                ];
+                }
+                else if($member->position){
+                    $formattedMember = [
+                        $memberImage,
+                        "{$member->name}, {$member->position}, {$member->university} {$member->nation}"
+                    ];
+                }
+                else{
+                    $formattedMember = [
+                        $memberImage,
+                        "{$member->name}, {$member->university} {$member->nation}"
+                        ];
+                    }
 
                 // Categorize the member based on their types
                 switch ($member->speaker_type) {
@@ -105,7 +125,7 @@ class ConferenceController extends Controller
                 }
                 switch ($member->member_type) {
                     case 'program':
-                        if ($member->nation == 'UK') {
+                        if ($member->nation == 'Myanmar' || $member->nation == 'myanmar') {
                             $programCommitteeLocal[] = $formattedMember;
                         } else {
                             $programCommitteeForeign[] = $formattedMember;

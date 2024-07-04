@@ -5,6 +5,7 @@
 @section('content')
     <div class="text-black">
         <div class="col-lg-12 grid-margin">
+            
             <div class="">
                 <div class="card-body">
                     @if (session('success'))
@@ -20,15 +21,10 @@
 
                         <div class="d-flex justify-content-between">
 
-                          <a href="{{route('news#create')}}" class="btn" style="background-color: #3798A6; padding-top:10px">+ Add</a>
+                          <a href="{{route('conf#createPage')}}" class="btn" style="background-color: #3798A6; padding-top:10px">+ Add</a>
 
                         <div >
-                          <form method="GET" class="d-flex" action="{{ route('news#list') }}">
-
-                            <input name="search" type="text" placeholder="Search news ..." class="form-control bg-secondary" value="{{ request()->input('search') }}">
-                            <button type="submit" class="btn " style="background-color: #3798A6"><i
-                                    class="fa-solid fa-magnifying-glass"></i></button>
-                          </form>
+                          
                         </div>
                       </div>
                     </div>

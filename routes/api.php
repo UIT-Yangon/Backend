@@ -4,10 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\StaffController;
-
-// use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\SubjectController;
-
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\ConferenceController;
@@ -18,8 +15,12 @@ use App\Http\Controllers\ConferenceController;
 Route::post('/login', [AdminAuthController::class, 'login']);
 Route::post('/register', [AdminAuthController::class, 'register']);
 
-Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts/{id}', [PostController::class, 'show']);
+Route::get('/posts/{type}', [PostController::class, 'index']);
+// Route::get('/posts/{id}', function()
+// {
+//     dd('Hello');
+// });
+Route::get('/news/{id}',[PostController::class,'show']);
 
 Route::get('/staff', [StaffController::class, 'index']);
 Route::get('/staff/{id}', [StaffController::class, 'show']);
