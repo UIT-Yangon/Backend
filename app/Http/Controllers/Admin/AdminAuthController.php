@@ -90,7 +90,7 @@ class AdminAuthController extends Controller
         ]);
 
         // Redirect to login page with success message
-        return redirect()->route('login')->with('success', 'Admin Registration Successful');
+        return redirect()->route('news#list')->with('success', 'Admin Registration Successful');
     }
 
     public function changePassword(Request $request)
