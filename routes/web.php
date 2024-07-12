@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ConferenceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\StaffController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +17,6 @@ use App\Http\Controllers\Admin\AdminAuthController;
 |
 */
 
-<<<<<<< HEAD
-=======
-Route::get('/', function () {
-    return view('authentication.login');
-})->name('login');
->>>>>>> origin/main
 
 
 Route::prefix('/news')->group(function(){
@@ -68,7 +63,16 @@ Route::prefix('/conference')->group(function(){
     });
     
 
-
+    Route::prefix('/staff')->group(function(){
+        Route::get('/list',[StaffController::class,'list'])->name('staff#list');
+        Route::get('/create', [StaffController::class, 'create'])->name('staff#create');
+        Route::post('/store',[StaffController::class,'store'])->name('staff#store');
+        Route::get('/detail/{id}',[StaffController::class,'detail'])->name('staff#detail');
+        Route::get('/delete/{id}',[StaffController::class,'delete'])->name('staff#delete');
+        Route::get('/back',[StaffController::class, 'Back'])->name('staff#back');
+        Route::get('/edit/{id}',[StaffController::class, 'edit'])->name('staff#edit');
+        Route::post('/edit/{id}' , [StaffController::class, 'update'])->name('staff#update');
+    });
     
     
     

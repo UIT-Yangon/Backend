@@ -132,7 +132,14 @@
             </a>
           </li>
 
-
+          <li class="nav-item menu-items">
+            <a class="nav-link1 nav-link" href="{{route('staff#list')}}">
+              <span class="menu-icon icon-bg">
+                <i class="mdi mdi-account"></i>
+              </span>
+              <span class="menu-title text">Staff</span>
+            </a>
+          </li>
           
         </ul>
       </nav>
