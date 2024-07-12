@@ -78,8 +78,8 @@
                 <div class="profile-name">
                   @if(Auth::check())
                   <h5 class="mb-0 font-weight-normal"> {{ Auth::user()->name }} </h5>
-=======
-                  <h5 class="mb-0 font-weight-normal">user name here</h5>                  <span class="text">Admin</span>
+
+                                   <span class="text">Admin</span>
                 @endif
                 </div>
               </div>

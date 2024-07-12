@@ -19,6 +19,21 @@ use App\Http\Controllers\Admin\StaffController;
 
 
 
+
+Route::get('/', function () {
+    return view('authentication.login');
+})->name('login');
+
+
+
+
+    Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin#login');
+    Route::get('/admin/register', [AdminAuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/admin/register', [AdminAuthController::class, 'register'])->name('admin#register');
+
+    Route::middleware(['check.role:admin'])->group(function () {
+        
 Route::prefix('/news')->group(function(){
     Route::get('/list',[NewsController::class,'list'])->name('news#list');
     Route::get('/create',[NewsController::class,'create'])->name('news#create');
@@ -50,12 +65,6 @@ Route::prefix('/conference')->group(function(){
 });
 
 
-    Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
-    Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin#login');
-    Route::get('/admin/register', [AdminAuthController::class, 'showRegisterForm'])->name('register');
-    Route::post('/admin/register', [AdminAuthController::class, 'register'])->name('admin#register');
-
-    Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/', [AdminAuthController::class, 'showWelcome'])->name('welcome');
         Route::get('/admin/changepassword',[AdminAuthController::class, 'showChangePasswordForm'])->name('changepassword');
         Route::post('/admin/changepassword', [AdminAuthController::class, 'changePassword']) ->name('admin#changepassword');
