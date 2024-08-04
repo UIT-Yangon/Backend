@@ -140,6 +140,15 @@
               <span class="menu-title text">Staff</span>
             </a>
           </li>
+
+          <li class="nav-item menu-items">
+            <a class="nav-link1 nav-link" href="{{route('publication#list')}}">
+              <span class="menu-icon icon-bg">
+                <i class="mdi mdi-account"></i>
+              </span>
+              <span class="menu-title text">Publications</span>
+            </a>
+          </li>
           
         </ul>
       </nav>

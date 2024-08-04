@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\StaffController;
+use App\Http\Controllers\LabPublicationController;
+use App\Models\LabPublication;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +71,16 @@ Route::prefix('/conference')->group(function(){
         Route::get('/admin/changepassword',[AdminAuthController::class, 'showChangePasswordForm'])->name('changepassword');
         Route::post('/admin/changepassword', [AdminAuthController::class, 'changePassword']) ->name('admin#changepassword');
         Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('logout');
+    
+        // publications 
+        Route::prefix('publications')->group(function () {
+            Route::get('/list',[LabPublicationController::class,'list'])->name('publication#list');
+            Route::get('/create',[LabPublicationController::class,'createPage'])->name('publication#create');
+            Route::post('/store',[LabPublicationController::class,'store'])->name('publication#store');
+            Route::get('/delete/{id}',[LabPublicationController::class,'delete'])->name('publication#delete');
+        });
+    
+    
     });
     
 

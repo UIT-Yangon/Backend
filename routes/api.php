@@ -7,6 +7,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\Api\LabPublicationController;
 use App\Http\Controllers\ConferenceController;
 
 
@@ -33,6 +34,10 @@ Route::get('/conferences/{id}',[ConferenceController::class,'show']); // confere
 ///--------------------------------------------------------------------------
 Route::get('/subjects', [SubjectController::class, 'index']);
 Route::get('/subjects/{id}', [SubjectController::class, 'show']);
+
+// Lab Publications 
+Route::get('/lab/publications',[LabPublicationController::class,'index']);
+Route::get('/lab/publications/{lab}',[LabPublicationController::class,'filterByLab']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AdminAuthController::class, 'logout']);
 });
