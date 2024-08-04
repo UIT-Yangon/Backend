@@ -13,6 +13,7 @@ class Staff extends Model
     use HasFactory;
     protected $fillable=['image','name','position','biography','education'];
 
+
     public function subjects()
     {
         return $this->belongsToMany(Subject::class, 'staff_subject');
