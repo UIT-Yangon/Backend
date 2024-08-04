@@ -62,6 +62,7 @@ class NewsController extends Controller
         $post->title = $request->title;
         $post->body = $sanitizedBody;
         $post->type = $request->type;
+        $post->date = $request->date;
         $post->user_id = '1';
         $post->save();
 
