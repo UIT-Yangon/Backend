@@ -17,7 +17,7 @@
                 </p>
                    
                    
-                <div class="d-flex flex-wrap">
+                {{-- <div class="d-flex flex-wrap">
                     @foreach ($data->images as $image)
                     <div class="w-50 p-2 border-white " >
                         <img src="{{asset('/storage/'.$image->name)}}" 
@@ -26,7 +26,7 @@
                     </div>
                     @endforeach
                    
-                </div>
+                </div> --}}
 
                 <a href="{{route('news#editPage',$data->id)}}" class="btn btn-dark p-3 mt-3">Edit News</a>
             </div>
