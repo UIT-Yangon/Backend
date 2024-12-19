@@ -221,6 +221,11 @@ class StaffController extends Controller
     }
 
     public function deleteStaffPub($id, $staffId){
-        dd($id,$staffId);
+        $deleted = StaffPublication::where('id', $id)->delete();
+        if ($deleted) {
+            return redirect()->back()->with('success', 'Publication deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Publication not found or already deleted.');
+        }
     }
 }

@@ -3,15 +3,25 @@
 @section('content')
 
     <div class="container">
+    @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>{{ session('success') }}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+        @endif
         <div class="row text-black">
             <div class="col-6">
                 @foreach($publications as $p)
                     <div class=" bg-white shadow-md px-2 py-3 my-1"  style="border: 1px solid #3798A6; border-radius:5px">
                         <div  class="d-flex justify-content-end my-2">
-                            <link href="{{route('staff#publications#delete',['id'=>$p->id, 'staffId'=>$p->staff_id])}}">
+                            <a href="{{route('staff#publications#delete',['id'=>$p->id, 'staffId'=>$p->staff_id])}}"
+                            onclick="return confirm('Are you sure you want to delete this publication?')"
+                            >
                             <i
                             class="fa-solid fa-trash text-danger border p-2  " style="border-radius: 50%;"></i>
-                            </link>
+                            </a>
                         </div>
                         <div class="d-flex justify-content-between">
                             <div>{{$p->title}}</div>

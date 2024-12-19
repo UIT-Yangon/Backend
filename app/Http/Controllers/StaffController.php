@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Publication;
 use App\Models\ResearchInterest;
 use App\Models\Staff;
+use App\Models\StaffPublication;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -43,9 +44,10 @@ class StaffController extends Controller
             }
             
             // Eager load publications and research interests
-            $staff = $query->with('publications', 'researchInterests')->paginate(10);
+            $staffs = Staff::with('staff_publications')->paginate(10);
 
-            Cache::put($cacheKey, $staff, 60);
+           
+            Cache::put($cacheKey, $staffs, 60);
         }
         return response()->json($staff);
     }
@@ -132,34 +134,34 @@ class StaffController extends Controller
     /**
      * Store a new research interest.
      */
-    public function storeResearchInterest(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'research' => 'required|string',
-            'staff_id' => 'required|integer|exists:staff,id'
-        ]);
+    // public function storeResearchInterest(Request $request)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'research' => 'required|string',
+    //         'staff_id' => 'required|integer|exists:staff,id'
+    //     ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
+    //     if ($validator->fails()) {
+    //         return response()->json(['errors' => $validator->errors()], 422);
+    //     }
 
-        try {
-            $purifierConfig = HTMLPurifier_Config::createDefault();
-            $purifier = new HTMLPurifier($purifierConfig);
+    //     try {
+    //         $purifierConfig = HTMLPurifier_Config::createDefault();
+    //         $purifier = new HTMLPurifier($purifierConfig);
 
-            $research = $purifier->purify($request->research);
-            $staffId = $purifier->purify($request->staff_id);
+    //         $research = $purifier->purify($request->research);
+    //         $staffId = $purifier->purify($request->staff_id);
 
-            $researchInterest = new ResearchInterest();
-            $researchInterest->research = $research;
-            $researchInterest->staff_id = $staffId; 
-            $researchInterest->save();
+    //         $researchInterest = new ResearchInterest();
+    //         $researchInterest->research = $research;
+    //         $researchInterest->staff_id = $staffId; 
+    //         $researchInterest->save();
 
-            return response()->json(['message' => 'Research Interest created successfully'], 201);
-        } catch (QueryException $e) {
-            return response()->json(['error' => 'Failed to create Research Interest: ' . $e->getMessage()], 500);
-        }
-    }
+    //         return response()->json(['message' => 'Research Interest created successfully'], 201);
+    //     } catch (QueryException $e) {
+    //         return response()->json(['error' => 'Failed to create Research Interest: ' . $e->getMessage()], 500);
+    //     }
+    // }
 
     /**
      * Display the specified resource.
@@ -173,15 +175,8 @@ class StaffController extends Controller
         }
 
         try {
-            $staff = Staff::with('image')->find($id);
-            $publication = Publication::where('staff_id', $id)->get();
-            $researchInterest = ResearchInterest::where('staff_id', $id)->get();
 
-            $data = [
-                'staff' => $staff,
-                'publication' => $publication,
-                'researchInterest' => $researchInterest,
-            ];
+            $data = Staff::with('staff_publications')->where('id',$id)->get();
 
             Cache::put($cacheKey, $data, 60);
 
@@ -278,34 +273,34 @@ class StaffController extends Controller
     /**
      * Update a research interest.
      */
-    public function updateResearchInterest(Request $request, int $researchInterestId)
-    {
-        $validator = Validator::make($request->all(), [
-            'research' => 'required|string',
-            'staff_id' => 'required|integer|exists:staff,id'
-        ]);
+    // public function updateResearchInterest(Request $request, int $researchInterestId)
+    // {
+    //     $validator = Validator::make($request->all(), [
+    //         'research' => 'required|string',
+    //         'staff_id' => 'required|integer|exists:staff,id'
+    //     ]);
 
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
+    //     if ($validator->fails()) {
+    //         return response()->json(['errors' => $validator->errors()], 422);
+    //     }
 
-        try {
-            $researchInterest = ResearchInterest::findOrFail($researchInterestId);
-            $purifierConfig = HTMLPurifier_Config::createDefault();
-            $purifier = new HTMLPurifier($purifierConfig);
+    //     try {
+    //         $researchInterest = ResearchInterest::findOrFail($researchInterestId);
+    //         $purifierConfig = HTMLPurifier_Config::createDefault();
+    //         $purifier = new HTMLPurifier($purifierConfig);
 
-            $researchInterest->update([
-                'research' => $purifier->purify($request->research),
-                'staff_id' => $request->staff_id
-            ]);
+    //         $researchInterest->update([
+    //             'research' => $purifier->purify($request->research),
+    //             'staff_id' => $request->staff_id
+    //         ]);
 
-            return response()->json(['message' => 'Research interest updated successfully'], 200);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['error' => 'Research interest not found'], 404);
-        } catch (QueryException $e) {
-            return response()->json(['error' => 'Failed to update research interest: ' . $e->getMessage()], 500);
-        }
-    }
+    //         return response()->json(['message' => 'Research interest updated successfully'], 200);
+    //     } catch (ModelNotFoundException $e) {
+    //         return response()->json(['error' => 'Research interest not found'], 404);
+    //     } catch (QueryException $e) {
+    //         return response()->json(['error' => 'Failed to update research interest: ' . $e->getMessage()], 500);
+    //     }
+    // }
 
     /**
      * Remove the specified resource from storage.
