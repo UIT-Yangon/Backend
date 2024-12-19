@@ -9,6 +9,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Api\LabPublicationController;
 use App\Http\Controllers\ConferenceController;
+use App\Http\Controllers\AlumniController;
 
 
 
@@ -34,6 +35,9 @@ Route::get('/conferences/{id}',[ConferenceController::class,'show']); // confere
 ///--------------------------------------------------------------------------
 Route::get('/subjects', [SubjectController::class, 'index']);
 Route::get('/subjects/{id}', [SubjectController::class, 'show']);
+
+Route::get('/alumni', [AlumniController::class, 'index']);
+Route::get('/alumni/{id}', [AlumniController::class, 'show']);
 
 // Lab Publications 
 Route::get('/lab/publications',[LabPublicationController::class,'index']);
