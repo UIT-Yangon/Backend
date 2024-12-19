@@ -34,9 +34,9 @@
                                 <tr>
                                     <th style="background-color: #3798A6; color:white"> # </th>
                                     <th style="background-color: #3798A6; color:white"> Name </th>
+                                    <th style="background-color: #3798A6; color:white"> Email </th>
                                     <th style="background-color: #3798A6; color:white"> Position </th>
-                                    <th style="background-color: #3798A6; color:white"> Biography </th>
-                                    <th style="background-color: #3798A6; color:white"> Education </th>
+                                    <th style="background-color: #3798A6; color:white"> Department </th>
                                     <th style="background-color: #3798A6;color:white">Actions</th>
                                 </tr>
                             </thead>
@@ -45,15 +45,21 @@
                                     <tr>
                                         <td>{{ $d->id }}</td>
                                         <td>{{ $d->name }}</td>
+                                        <td>{{ $d->email}}</td>
                                         <td>{{ $d->position }}</td>
-                                        <td>{{ $d->biography}}</td>
-                                        <td>{{ $d->education}}</td>
+                                        <td>{{ $d->department}}</td>
                                         <td>
+                                            <div>
                                             <a href="{{ route('staff#detail', $d->id) }}" class="btn  "
                                                 style="background-color: #3798A6 !important"><i
                                                     class="fa-solid fa-eye text-white"></i>Details</a>
                                             <a href="{{ route('staff#delete', $d->id) }}" class="btn btn-danger "><i
                                                     class="fa-solid fa-circle-info text-white"></i>Delete</a>
+                                            </div>
+                                            <div class="mt-2">
+                                            <a href="{{ route('staff#createPublicationPage', $d->id) }}" class="btn btn-primary "><i
+                                            class="fa-solid fa-circle-info text-white"></i>Manage publications</a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

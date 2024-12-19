@@ -129,6 +129,13 @@
                                 
                             </div>
                             <div class="mt-2">
+                                <label for="" class="form-label text-dark">Publication Link</label>
+                                <input type="text" class="form-control {{ $errors->has('link') ? 'is-invalid' : '' }} bg-white text-dark" name="link" style="border:1px solid #3798A6" >
+                                @error('link')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+                            <div class="mt-2">
                                 <label for="" class="form-label text-dark">Topics</label>
                                 <textarea name="topics" id="" cols="30" rows="10" class="form-control bg-white text-dark" style="border:1px solid #3798A6"></textarea>
                             </div>
@@ -175,7 +182,9 @@
                                 @error('member_type')
                                     <small class="text-danger">{{$message}}</small>
                                 @enderror
+                                
                             </div>
+                            
                             <div class="mt-2">
                                 <label for="" class="form-label text-dark">Chair Type</label>
                                 <select name="chair_type" id=""  class="form-control {{ $errors->has('chair_type') ? 'is-invalid' : '' }} bg-white text-dark" style="border:1px solid #3798A6">

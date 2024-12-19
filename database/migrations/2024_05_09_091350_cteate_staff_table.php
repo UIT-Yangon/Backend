@@ -15,9 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('image')->nullable();
             $table->string('name');
+            $table->string('email');
+            $table->string('department');
             $table->string('position');
             $table->longtext('biography');
-            $table->string('education');
+            $table->longtext('education');
+            $table->longtext('research_interests');
+            $table->longtext('courses_taught');
             $table->timestamps();
         });
     }

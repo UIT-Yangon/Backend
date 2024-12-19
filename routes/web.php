@@ -93,6 +93,10 @@ Route::prefix('/conference')->group(function(){
         Route::get('/back',[StaffController::class, 'Back'])->name('staff#back');
         Route::get('/edit/{id}',[StaffController::class, 'edit'])->name('staff#edit');
         Route::post('/edit/{id}' , [StaffController::class, 'update'])->name('staff#update');
+
+        Route::get('/staff/{id}/createPublicaion',[StaffController::class, 'createPublicaionPage'])->name('staff#createPublicationPage');
+        Route::post('/staff/storePublicaion',[StaffController::class, 'createPublicaion'])->name('staff#storePublication');
+        Route::get('/staff/publication/delete/{id}/{staffId}',[StaffController::class, 'deleteStaffPub'])->name('staff#publications#delete');
     });
     
     

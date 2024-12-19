@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('updated_deadline')->nullable();
             $table->date('original_deadline')->nullable();
             $table->string('status');
+            $table->string('ieee_link')->nullable(true);
             $table->date('accept_noti')->nullable();
             $table->string('email');
             $table->string('book')->nullable();
