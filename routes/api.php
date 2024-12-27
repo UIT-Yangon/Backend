@@ -10,6 +10,10 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\Api\LabPublicationController;
 use App\Http\Controllers\ConferenceController;
 use App\Http\Controllers\AlumniController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\UniCollaborationController;
+use App\HTTP\Controllers\OrgCollaborationController;
+use App\HTTP\Controllers\IndustryCollaborationController;
 
 
 
@@ -46,7 +50,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AdminAuthController::class, 'logout']);
 });
 
+Route::get('/fas',[FaqController::class, 'index']);
+Route::get('/faq/{id}',[FaqController::class, 'show']);
 
+Route::get('/collaboration/uni',[UniCollaborationController::class, 'index']);
+Route::get('/collaboration/uni/{id}',[UniCollaborationController::class, 'show']);
+
+Route::get('/collaboration/org',[OrgCollaborationController::class, 'index']);
+Route::get('/collaboration/org/{id}',[OrgCollaborationController::class, 'show']);
+
+Route::get('/collaboration/ind',[IndustryCollaborationController::class, 'index']);
+Route::get('/collaboration/ind/{id}',[IndustryCollaborationController::class, 'show']);
 
 
 
