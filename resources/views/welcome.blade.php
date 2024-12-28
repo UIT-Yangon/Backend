@@ -168,6 +168,25 @@
             </a>
           </li>
           
+
+          <li class="nav-item menu-items">
+            <a class="nav-link1 nav-link" href="{{route('col#list')}}">
+              <span class="menu-icon icon-bg">
+              <i class="mdi mdi-ungroup"></i>
+              </span>
+              <span class="menu-title text">Collaboration</span>
+            </a>
+          </li>
+
+          <li class="nav-item menu-items">
+            <a class="nav-link1 nav-link" href="{{route('faq#list')}}">
+              <span class="menu-icon icon-bg">
+              <i class="mdi mdi-comment-question-outline"></i>
+              </span>
+              <span class="menu-title text">FAQs</span>
+            </a>
+          </li>
+          
         </ul>
       </nav>
       <!-- partial -->
