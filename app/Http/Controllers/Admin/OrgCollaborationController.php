@@ -59,7 +59,7 @@ class OrgCollaborationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
+            'country' => 'nullable|string|max:255',
             'link' => 'nullable|url|max:255',
         ])->validate();
         
