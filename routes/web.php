@@ -14,6 +14,7 @@ use App\Models\LabPublication;
 use App\Http\Controllers\Admin\UniCollaborationController;
 use App\Http\Controllers\Admin\IndustryCollaborationController;
 use App\Http\Controllers\Admin\OrgCollaborationController;
+use App\Http\Controllers\SponsorController;
 use App\Models\UniCollaboration;
 
 /*
@@ -72,6 +73,10 @@ Route::prefix('/conference')->group(function(){
     Route::get('/edit/conf/{id}',[ConferenceController::class,'editPage'])->name('conf#editPage');
     Route::post('/update',[ConferenceController::class,'updateInfo'])->name('conf#updateInfo');
     Route::get('/delete/img/{id}/{name}',[ConferenceController::class,'deleteImg'])->name('conf#deleteImg');
+
+    Route::get('/{id}/sponsors',[SponsorController::class,'sponsorPage'])->name('conf#sponsorPage');
+    Route::post('/store/sponsor',[SponsorController::class,'store'])->name('store#sponsor');
+    Route::get('/sponsor/delete/{id}',[SponsorController::class,'deleteSponsor'])->name('sponsor#delete');
 });
 
 

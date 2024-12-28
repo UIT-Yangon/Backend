@@ -140,7 +140,7 @@
                 
                 <a href="{{route('conf#commiteePage',[$conference[0]->id, 'organizing'])}}" class="btn mt-3" style="background-color: #3798A6">Organizing committee</a>
                 <a href="{{route('conf#commiteePage',[$conference[0]->id, 'program'])}}" class="btn mt-3" style="background-color: #3798A6">Program committee</a>
-
+                <a href="{{route('conf#sponsorPage',$conference[0]->id)}}" class="btn mt-3" style="background-color: #3798A6">Sponsors</a>
             </div>
         </div>
     </div>
