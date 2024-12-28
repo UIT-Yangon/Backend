@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>UIT Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('assets/vendors/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendors/css/vendor.bundle.base.css')}}">
@@ -149,6 +150,23 @@
               <span class="menu-title text">Publications</span>
             </a>
           </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link1 nav-link" href="{{route('admissions#createPage')}}">
+              <span class="menu-icon icon-bg">
+                <i class="mdi mdi-account"></i>
+              </span>
+              <span class="menu-title text">Admission Requirements</span>
+            </a>
+          </li>
+
+          <li class="nav-item menu-items">
+            <a class="nav-link1 nav-link" href="{{route('about#createPage')}}">
+              <span class="menu-icon icon-bg">
+                <i class="mdi mdi-account"></i>
+              </span>
+              <span class="menu-title text">About</span>
+            </a>
+          </li>
           
         </ul>
       </nav>
@@ -244,5 +262,6 @@
     <!-- Custom js for this page -->
     <script src="{{asset('assets/js/dashboard.js')}}"></script>
     <!-- End custom js for this page -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>

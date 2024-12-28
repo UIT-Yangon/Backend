@@ -4,8 +4,11 @@ use App\Http\Controllers\Admin\ConferenceController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdmissionController;
 use App\Http\Controllers\Admin\StaffController;
 use App\Http\Controllers\LabPublicationController;
+use App\Http\Controllers\UitTimelineController;
+use App\Http\Controllers\VisionMissionController;
 use App\Models\LabPublication;
 
 /*
@@ -99,9 +102,17 @@ Route::prefix('/conference')->group(function(){
         Route::get('/staff/publication/delete/{id}/{staffId}',[StaffController::class, 'deleteStaffPub'])->name('staff#publications#delete');
     });
     
-    
-    
+    Route::prefix('/admission')->group(function(){
+        Route::get('/create',[AdmissionController::class,'createPage'])->name('admissions#createPage');
+        Route::post('/store',[AdmissionController::class, 'store'])->name('admission#requirement#store');
+        Route::post('/update',[AdmissionController::class, 'update'])->name('admission#requirement#update');
+    });
 
-    
+    Route::prefix('/about')->group(function(){
+        Route::get('/createPage',[UitTimelineController::class,'aboutPage'])->name('about#createPage');
+        Route::post('/store/timeline',[UitTimelineController::class, 'storeTimeline'])->name('store#timeline');
+        Route::post('/store/vision/mission',[VisionMissionController::class,'storeVisionMission'])->name('store#vision#mission');
+        Route::post('/update/vision/mission',[VisionMissionController::class,'updateVisionMission'])->name('update#vision#mission');
+    });
 
     
