@@ -62,5 +62,5 @@ Route::get('/collaboration/ind',[IndustryCollaborationController::class, 'index'
 Route::get('/collaboration/ind/{id}',[IndustryCollaborationController::class, 'show']);Route::get('/admission/requirements', [AdmissionController::class, 'showAdmissionRequirements']);
 
 Route::get('/about', [VisionMissionController::class,'showAboutVMV']);
-
+Route::get('/admission/requirements',[AdmissionController::class,'showAdmissionRequirements']);
 
