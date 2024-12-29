@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Publication;
 use App\Models\ResearchInterest;
 use App\Models\Staff;
+use App\Models\StaffPublication;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
@@ -19,7 +20,8 @@ class StaffController extends Controller
     {
         $query = Staff::query();
         $data = $query->orderBy('created_at', 'asc')->paginate(10); 
-        return view('staff.staff_list', ['data' => $data]);
+        // dd($data);
+        return view('staff.staff_list', ['data' => $data, ]);
     }
 
     public function create()
@@ -30,7 +32,26 @@ class StaffController extends Controller
     public function detail($id)
     {
         $data = Staff::find($id);
-        return view('staff.staff_detail' , ['data' => $data]);
+        $courses = explode('#', $data->courses_taught);
+        $courses = array_filter($courses, function($course) {
+            return !empty($course);
+        });
+        $courses = array_values($courses);
+
+        $interests = explode('#', $data->research_interests);
+        $interests = array_filter($interests, function($interest) {
+            return !empty($interest);
+        });
+        $interests = array_values($interests);
+
+        $education = explode('#', $data->education);
+        $education = array_filter($education, function($e) {
+            return !empty($e);
+        });
+        $education = array_values($education);
+
+        // dd($education);
+        return view('staff.staff_detail' , ['data' => $data, 'courses' => $courses, 'interests' => $interests, 'education'=>$education]);
     }
 
     public function store(Request $request)
@@ -41,6 +62,9 @@ class StaffController extends Controller
             'position' => 'required|string',
             'biography' => 'required|string',
             'education' => 'required|string',
+            'department' => 'required|string',
+            'researchInterest' => 'required|string',
+            'courseTaught' => 'required|string',
         ])->validate();
 
             $purifierConfig = HTMLPurifier_Config::createDefault();
@@ -49,13 +73,21 @@ class StaffController extends Controller
             $staffName = $purifier->purify($request->name);
             $position = $purifier->purify($request->position);
             $biography = $purifier->purify($request->biography);
-            $education = $purifier->purify($request->education);
+            $education =$request->education;
+            $department =$request->department;
+            $courseTaught =$request->courseTaught;
+            $researchInterest =$request->researchInterest;
+            $email =$request->email;
 
             $staff = new Staff();
             $staff->name = $staffName;
+            $staff->email = $email;
             $staff->position = $position;
             $staff->biography = $biography;
             $staff->education = $education;
+            $staff->department = $department;
+            $staff->courses_taught = $courseTaught;
+            $staff->research_interests = $researchInterest;
 
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -78,11 +110,14 @@ class StaffController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = Validator::make($request->all(), [
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:10000',
+           'image' => 'image|mimes:jpeg,png,jpg,gif|max:10000',
             'name' => 'required|string',
             'position' => 'required|string',
             'biography' => 'required|string',
             'education' => 'required|string',
+            'department' => 'required|string',
+            'researchInterest' => 'required|string',
+            'courseTaught' => 'required|string',
         ])->validate();
 
         
@@ -102,10 +137,14 @@ class StaffController extends Controller
 
             // Update fields
             $staff->update([
-                'name' => $purifier->purify($request->name),
-                'position' => $purifier->purify($request->position),
-                'biography' => $purifier->purify($request->biography),
-                'education' => $purifier->purify($request->education)
+                "name" => $purifier->purify($request->name),
+                "position" => $purifier->purify($request->position),
+                "biography" =>  $purifier->purify($request->biography),
+                "education" => $request->education,
+                "department" => $request->department,
+                "courses_taught" => $request->courseTaught,
+                "research_interests" => $request->researchInterest,
+                "email" => $request->email,
             ]);
 
             if ($request->hasFile('image')) {
@@ -154,4 +193,39 @@ class StaffController extends Controller
         return redirect()->route('staff#list')->with('success', 'Staff deleted successfully');
     }
 
+
+    // publication crud
+    public function createPublicaionPage($id){
+        // dd($id);
+        $publications = StaffPublication::all();
+        return view('staff.create_staff_publication',compact('id','publications'));
+    }
+
+
+
+    public function createPublicaion(Request $request){
+        // dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+             'description' => 'required|string',
+             'date' => 'required',
+         ])->validate();
+
+         $publication = new StaffPublication();
+         $publication->title = $request->title;
+         $publication->description = $request->description;
+         $publication->date = $request->date;
+         $publication->staff_id = $request->staff_id;
+         $publication->save();
+         return redirect()->back();
+    }
+
+    public function deleteStaffPub($id, $staffId){
+        $deleted = StaffPublication::where('id', $id)->delete();
+        if ($deleted) {
+            return redirect()->back()->with('success', 'Publication deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Publication not found or already deleted.');
+        }
+    }
 }

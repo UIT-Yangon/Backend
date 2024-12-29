@@ -57,6 +57,13 @@
                         <td class="text-white " style="background-color: #3798A6">{{ $conference[0]->conference_date }}</td>
                     </tr>
 
+                    <tr style="border-bottom: 2px solid white">
+                        <td>IEEE publication link</td>
+                        <td>:</td>
+
+                        <td class="text-white " style="background-color: #3798A6; cursor:pointer"><link href='{{$conference[0]->ieee_link}}'>{{$conference[0]->ieee_link}}</link></td>
+                    </tr>
+
 
                 </table>
             </div>
@@ -133,7 +140,7 @@
                 
                 <a href="{{route('conf#commiteePage',[$conference[0]->id, 'organizing'])}}" class="btn mt-3" style="background-color: #3798A6">Organizing committee</a>
                 <a href="{{route('conf#commiteePage',[$conference[0]->id, 'program'])}}" class="btn mt-3" style="background-color: #3798A6">Program committee</a>
-
+                <a href="{{route('conf#sponsorPage',$conference[0]->id)}}" class="btn mt-3" style="background-color: #3798A6">Sponsors</a>
             </div>
         </div>
     </div>

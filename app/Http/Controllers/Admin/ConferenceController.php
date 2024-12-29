@@ -61,6 +61,7 @@ class ConferenceController extends Controller
         }
         $conference = new Conference();
         $conference->name = $request->name;
+        $conference->ieee_link = $request->link;
         $conference->paperCall = $request->paperCall;
         $conference->original_deadline = $request->original_deadline;
         $conference->status = $request->status;
@@ -315,6 +316,7 @@ class ConferenceController extends Controller
             
         }
         $conference->name = $request->name;
+        $conference->ieee_link = $request->link;
         $conference->paperCall = $request->paperCall;
         $conference->updated_deadline = $request->original_deadline;
         $conference->status = $request->status;

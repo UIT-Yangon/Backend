@@ -19,7 +19,7 @@ class Conference extends Model
     protected $fillable = [
        'name','paperCall', 'updated_deadline', 'original_deadline', 'status', 'accept_noti',
         'email', 'book', 'brochure', 'local_fee', 'foreign_fee', 'conference_date',
-        'paper_format', 'topics', 'images'
+        'paper_format', 'topics', 'images','ieee_link'
     ];
 
     protected $casts = [

@@ -41,9 +41,15 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+<<<<<<< HEAD
                                 <label for="exampleInputName1" class="text-black">Date <span class="text-danger"></span></label>
                                 <input type="date" class="form-control  bg-white" id="exampleInputName1" placeholder="date"
                                     name="date" value="{{ old('date') }}" style="color:black !important; border:1px solid #3798A6 !important; ">
+=======
+                                <label for="exampleInputName1" class="text-black">Date <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control  bg-white" id="exampleInputName1" placeholder="date"
+                                    name="date" value="{{ old('title') }}" style="color:black !important; border:1px solid #3798A6 !important; ">
+>>>>>>> 03bbdc513fe5af5565c24c79edad2ef1cc80c5e1
                                 @error('date')
                                     <small class="text-danger">{{$message}}</small>
                                 @enderror

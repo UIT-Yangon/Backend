@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
+class ComposerStaticInit1b7ecb945976d839284ec8ab36064b18
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -18,12 +18,12 @@ class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '662a729f963d39afe703c9d9b7ab4a8c' => __DIR__ . '/..' . '/symfony/polyfill-php83/bootstrap.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '47e1160838b5e5a10346ac4084b58c23' => __DIR__ . '/..' . '/laravel/prompts/src/helpers.php',
         '35a6ad97d21e794e7e22a17d806652e4' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Functions.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
-        '47e1160838b5e5a10346ac4084b58c23' => __DIR__ . '/..' . '/laravel/prompts/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
@@ -366,8 +366,8 @@ class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -569,8 +569,11 @@ class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
         'App\\Http\\Controllers\\Admin\\AdminAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminAuthController.php',
         'App\\Http\\Controllers\\Admin\\ConferenceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/ConferenceController.php',
         'App\\Http\\Controllers\\Admin\\NewsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/NewsController.php',
+        'App\\Http\\Controllers\\Admin\\StaffController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/StaffController.php',
+        'App\\Http\\Controllers\\Api\\LabPublicationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/LabPublicationController.php',
         'App\\Http\\Controllers\\ConferenceController' => __DIR__ . '/../..' . '/app/Http/Controllers/ConferenceController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\LabPublicationController' => __DIR__ . '/../..' . '/app/Http/Controllers/LabPublicationController.php',
         'App\\Http\\Controllers\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/PostController.php',
         'App\\Http\\Controllers\\StaffController' => __DIR__ . '/../..' . '/app/Http/Controllers/StaffController.php',
         'App\\Http\\Controllers\\SubjectController' => __DIR__ . '/../..' . '/app/Http/Controllers/SubjectController.php',
@@ -578,6 +581,7 @@ class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\AdminMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminMiddleware.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\CheckRole' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckRole.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -592,6 +596,7 @@ class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
         'App\\Models\\CommitteMember' => __DIR__ . '/../..' . '/app/Models/CommitteMember.php',
         'App\\Models\\Conference' => __DIR__ . '/../..' . '/app/Models/Conference.php',
         'App\\Models\\ConferenceImage' => __DIR__ . '/../..' . '/app/Models/ConferenceImage.php',
+        'App\\Models\\LabPublication' => __DIR__ . '/../..' . '/app/Models/LabPublication.php',
         'App\\Models\\NewsImage' => __DIR__ . '/../..' . '/app/Models/NewsImage.php',
         'App\\Models\\Post' => __DIR__ . '/../..' . '/app/Models/Post.php',
         'App\\Models\\Publication' => __DIR__ . '/../..' . '/app/Models/Publication.php',
@@ -3170,6 +3175,7 @@ class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
         'Intervention\\Image\\Decoders\\BinaryImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Decoders/BinaryImageDecoder.php',
         'Intervention\\Image\\Decoders\\ColorObjectDecoder' => __DIR__ . '/..' . '/intervention/image/src/Decoders/ColorObjectDecoder.php',
         'Intervention\\Image\\Decoders\\DataUriImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Decoders/DataUriImageDecoder.php',
+        'Intervention\\Image\\Decoders\\EncodedImageObjectDecoder' => __DIR__ . '/..' . '/intervention/image/src/Decoders/EncodedImageObjectDecoder.php',
         'Intervention\\Image\\Decoders\\FilePathImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Decoders/FilePathImageDecoder.php',
         'Intervention\\Image\\Decoders\\FilePointerImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Decoders/FilePointerImageDecoder.php',
         'Intervention\\Image\\Decoders\\ImageObjectDecoder' => __DIR__ . '/..' . '/intervention/image/src/Decoders/ImageObjectDecoder.php',
@@ -3192,6 +3198,7 @@ class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
         'Intervention\\Image\\Drivers\\Gd\\Decoders\\Base64ImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Gd/Decoders/Base64ImageDecoder.php',
         'Intervention\\Image\\Drivers\\Gd\\Decoders\\BinaryImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Gd/Decoders/BinaryImageDecoder.php',
         'Intervention\\Image\\Drivers\\Gd\\Decoders\\DataUriImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Gd/Decoders/DataUriImageDecoder.php',
+        'Intervention\\Image\\Drivers\\Gd\\Decoders\\EncodedImageObjectDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Gd/Decoders/EncodedImageObjectDecoder.php',
         'Intervention\\Image\\Drivers\\Gd\\Decoders\\FilePathImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Gd/Decoders/FilePathImageDecoder.php',
         'Intervention\\Image\\Drivers\\Gd\\Decoders\\FilePointerImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Gd/Decoders/FilePointerImageDecoder.php',
         'Intervention\\Image\\Drivers\\Gd\\Decoders\\NativeObjectDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Gd/Decoders/NativeObjectDecoder.php',
@@ -3259,6 +3266,7 @@ class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
         'Intervention\\Image\\Drivers\\Imagick\\Decoders\\Base64ImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Imagick/Decoders/Base64ImageDecoder.php',
         'Intervention\\Image\\Drivers\\Imagick\\Decoders\\BinaryImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Imagick/Decoders/BinaryImageDecoder.php',
         'Intervention\\Image\\Drivers\\Imagick\\Decoders\\DataUriImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Imagick/Decoders/DataUriImageDecoder.php',
+        'Intervention\\Image\\Drivers\\Imagick\\Decoders\\EncodedImageObjectDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Imagick/Decoders/EncodedImageObjectDecoder.php',
         'Intervention\\Image\\Drivers\\Imagick\\Decoders\\FilePathImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Imagick/Decoders/FilePathImageDecoder.php',
         'Intervention\\Image\\Drivers\\Imagick\\Decoders\\FilePointerImageDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Imagick/Decoders/FilePointerImageDecoder.php',
         'Intervention\\Image\\Drivers\\Imagick\\Decoders\\NativeObjectDecoder' => __DIR__ . '/..' . '/intervention/image/src/Drivers/Imagick/Decoders/NativeObjectDecoder.php',
@@ -3969,6 +3977,7 @@ class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
         'Livewire\\Features\\SupportConsoleCommands\\Commands\\CpCommand' => __DIR__ . '/..' . '/livewire/livewire/src/Features/SupportConsoleCommands/Commands/CpCommand.php',
         'Livewire\\Features\\SupportConsoleCommands\\Commands\\DeleteCommand' => __DIR__ . '/..' . '/livewire/livewire/src/Features/SupportConsoleCommands/Commands/DeleteCommand.php',
         'Livewire\\Features\\SupportConsoleCommands\\Commands\\FileManipulationCommand' => __DIR__ . '/..' . '/livewire/livewire/src/Features/SupportConsoleCommands/Commands/FileManipulationCommand.php',
+        'Livewire\\Features\\SupportConsoleCommands\\Commands\\FluxInstallCommand' => __DIR__ . '/..' . '/livewire/livewire/src/Features/SupportConsoleCommands/Commands/FluxInstallCommand.php',
         'Livewire\\Features\\SupportConsoleCommands\\Commands\\FormCommand' => __DIR__ . '/..' . '/livewire/livewire/src/Features/SupportConsoleCommands/Commands/FormCommand.php',
         'Livewire\\Features\\SupportConsoleCommands\\Commands\\LayoutCommand' => __DIR__ . '/..' . '/livewire/livewire/src/Features/SupportConsoleCommands/Commands/LayoutCommand.php',
         'Livewire\\Features\\SupportConsoleCommands\\Commands\\MakeCommand' => __DIR__ . '/..' . '/livewire/livewire/src/Features/SupportConsoleCommands/Commands/MakeCommand.php',
@@ -4839,6 +4848,7 @@ class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
         'PHPUnit\\Framework\\MockObject\\MockObjectApi' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/Api/MockObjectApi.php',
         'PHPUnit\\Framework\\MockObject\\MockObjectInternal' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/Interface/MockObjectInternal.php',
         'PHPUnit\\Framework\\MockObject\\NeverReturningMethodException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Exception/NeverReturningMethodException.php',
+        'PHPUnit\\Framework\\MockObject\\NoMoreReturnValuesConfiguredException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Exception/NoMoreReturnValuesConfiguredException.php',
         'PHPUnit\\Framework\\MockObject\\ProxiedCloneMethod' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/Api/ProxiedCloneMethod.php',
         'PHPUnit\\Framework\\MockObject\\ReflectionException' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Exception/ReflectionException.php',
         'PHPUnit\\Framework\\MockObject\\ReturnValueGenerator' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/MockObject/Runtime/ReturnValueGenerator.php',
@@ -6297,6 +6307,7 @@ class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
         'Spatie\\ErrorSolutions\\SolutionProviders\\Laravel\\ViewNotFoundSolutionProvider' => __DIR__ . '/..' . '/spatie/error-solutions/src/SolutionProviders/Laravel/ViewNotFoundSolutionProvider.php',
         'Spatie\\ErrorSolutions\\SolutionProviders\\MergeConflictSolutionProvider' => __DIR__ . '/..' . '/spatie/error-solutions/src/SolutionProviders/MergeConflictSolutionProvider.php',
         'Spatie\\ErrorSolutions\\SolutionProviders\\UndefinedPropertySolutionProvider' => __DIR__ . '/..' . '/spatie/error-solutions/src/SolutionProviders/UndefinedPropertySolutionProvider.php',
+        'Spatie\\ErrorSolutions\\Solutions\\Concerns\\IsProvidedByFlare' => __DIR__ . '/..' . '/spatie/error-solutions/src/Solutions/Concerns/IsProvidedByFlare.php',
         'Spatie\\ErrorSolutions\\Solutions\\Laravel\\GenerateAppKeySolution' => __DIR__ . '/..' . '/spatie/error-solutions/src/Solutions/Laravel/GenerateAppKeySolution.php',
         'Spatie\\ErrorSolutions\\Solutions\\Laravel\\LivewireDiscoverSolution' => __DIR__ . '/..' . '/spatie/error-solutions/src/Solutions/Laravel/LivewireDiscoverSolution.php',
         'Spatie\\ErrorSolutions\\Solutions\\Laravel\\MakeViewVariableOptionalSolution' => __DIR__ . '/..' . '/spatie/error-solutions/src/Solutions/Laravel/MakeViewVariableOptionalSolution.php',
@@ -6473,6 +6484,7 @@ class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
         'Spatie\\LaravelIgnition\\Support\\LaravelVersion' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Support/LaravelVersion.php',
         'Spatie\\LaravelIgnition\\Support\\RunnableSolutionsGuard' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Support/RunnableSolutionsGuard.php',
         'Spatie\\LaravelIgnition\\Support\\SentReports' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Support/SentReports.php',
+        'Spatie\\LaravelIgnition\\Support\\StringComparator' => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition/Support/StringComparator.php',
         'Spatie\\LaravelIgnition\\Views\\BladeSourceMapCompiler' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Views/BladeSourceMapCompiler.php',
         'Spatie\\LaravelIgnition\\Views\\ViewExceptionMapper' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/Views/ViewExceptionMapper.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
@@ -7519,10 +7531,10 @@ class ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitac60432ba5a8690d6d79f01e070bc8d6::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1b7ecb945976d839284ec8ab36064b18::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1b7ecb945976d839284ec8ab36064b18::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1b7ecb945976d839284ec8ab36064b18::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit1b7ecb945976d839284ec8ab36064b18::$classMap;
 
         }, null, ClassLoader::class);
     }

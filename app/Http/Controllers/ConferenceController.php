@@ -7,6 +7,7 @@ use App\Models\Committee;
 use App\Models\Conference;
 use Illuminate\Http\Request;
 use App\Models\CommitteMember;
+use App\Models\Sponsor;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
@@ -167,6 +168,8 @@ class ConferenceController extends Controller
             $conferenceData['general_co_chair'] = $generalCoChair;
             $conferenceData['program_chair'] = $programChair;
 
+            $sponsors = Sponsor::where('conf_id',$id)->get();
+            $conferenceData['sponsors'] = $sponsors;
             // Cache the conference data
             Cache::put($cacheKey, $conferenceData, 60);
 

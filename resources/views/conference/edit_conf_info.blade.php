@@ -190,7 +190,13 @@
                                     <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </div> --}}
-                            
+                            <div class="mt-2">
+                                <label for="" class="form-label text-dark">Publication Link</label>
+                                <input type="text" class="form-control {{ $errors->has('link') ? 'is-invalid' : '' }} bg-white text-dark" value="{{$conference[0]->ieee_link}}" name="link" style="border:1px solid #3798A6" >
+                                @error('link')
+                                <small class="text-danger">{{$message}}</small>
+                            @enderror
+                            </div>
                             <div class="mt-2">
                                 <button class="btn" style="background-color: #3798A6">Add</button>
                                 <a href="#" class="btn" style="background-color: #3798A6">Back</a>
