@@ -14,7 +14,7 @@ class Post extends Model
     use SoftDeletes;
 
     protected $dates = ['deleted_at']; // Specify the column used for soft deletes
-    protected $fillable =['title','body','admin_id','type']; // Specify fillable fields
+    protected $fillable =['title','body','admin_id','type','date']; // Specify fillable fields
     public function images()
     {
         return $this->hasMany(NewsImage::class);

@@ -140,6 +140,15 @@
               <span class="menu-title text">Staff</span>
             </a>
           </li>
+
+          <li class="nav-item menu-items">
+            <a class="nav-link1 nav-link" href="{{route('pdf#list')}}">
+              <span class="menu-icon icon-bg">
+                <i class="fa-solid fa-file-pdf"></i>
+              </span>
+              <span class="menu-title text">PDFs</span>
+            </a>
+          </li>
           
         </ul>
       </nav>

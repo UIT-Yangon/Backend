@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\SubjectController;
@@ -36,6 +37,9 @@ Route::get('/subjects/{id}', [SubjectController::class, 'show']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AdminAuthController::class, 'logout']);
 });
+
+Route::get('/pdfs-grouped-by-type', [PdfController::class, 'getPdfsGroupedByType']);
+
 
 
 

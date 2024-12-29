@@ -39,7 +39,14 @@
                         </div>
                     @endforeach
                     </div>
-
+                    <div class="form-group">
+                      <label for="exampleInputName1" class="text-black">Date <span class="text-danger"></span></label>
+                      <input type="date" class="form-control  bg-white" id="exampleInputName1" placeholder="date" value={{$data->date}}
+                          name="date"  style="color:black !important; border:1px solid #3798A6 !important; ">
+                      @error('date')
+                          <small class="text-danger">{{$message}}</small>
+                      @enderror
+                  </div>
                     <div class="form-group">
                       <label class="text-black">Image upload</label>
                       <input type="file" id="images" class="form-control   bg-white" style="color:black !important; border:1px solid #3798A6 !important; " name="images[]" multiple>

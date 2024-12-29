@@ -41,6 +41,14 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="exampleInputName1" class="text-black">Date <span class="text-danger"></span></label>
+                                <input type="date" class="form-control  bg-white" id="exampleInputName1" placeholder="date"
+                                    name="date" value="{{ old('date') }}" style="color:black !important; border:1px solid #3798A6 !important; ">
+                                @error('date')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleTextarea1" class="text-white">Body</label>
                                 <textarea id="content"  class="form-control  bg-white" style="color:black !important; border:1px solid #3798A6 !important; "  rows="10" cols="10" name="body"></textarea>
                                 @error('body')

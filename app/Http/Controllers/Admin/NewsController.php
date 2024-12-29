@@ -45,7 +45,8 @@ class NewsController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string',
             // 'user_id' => 'required|integer',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:10000', // Example validation rules for images
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:10000',
+             // Example validation rules for images
         ])->validate();
 
         // Check if validation fails
@@ -62,6 +63,7 @@ class NewsController extends Controller
         $post->title = $request->title;
         $post->body = $sanitizedBody;
         $post->type = $request->type;
+        $post->date = $request->date;
         $post->user_id = '1';
         $post->save();
 
@@ -113,6 +115,7 @@ class NewsController extends Controller
         $post = Post::find($request->id);
         $post->title = $request->title;
         $post->body = $sanitizedBody;
+        $post->date = $request->date;
         $post->type = $request->type;
         $post->save();
 
