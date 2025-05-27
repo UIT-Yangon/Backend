@@ -26,7 +26,7 @@ class StaffController extends Controller
         $cacheKey = 'staff_' . serialize($request->all());
 
         if (Cache::has($cacheKey)) {
-            $staff = Cache::get($cacheKey);
+            $staffs = Cache::get($cacheKey);
         } else {
             $sortBy = $request->query('sort_by', 'id');
             $sortDir = $request->query('sort_dir', 'asc');
@@ -42,14 +42,14 @@ class StaffController extends Controller
                     $q->where('faculty', $faculty);
                 });
             }
-            
+
             // Eager load publications and research interests
             $staffs = Staff::with('staff_publications')->paginate(10);
 
-           
+
             Cache::put($cacheKey, $staffs, 60);
         }
-        return response()->json($staff);
+        return response()->json($staffs);
     }
 
     /**
@@ -122,7 +122,7 @@ class StaffController extends Controller
 
             $publication = new Publication();
             $publication->publications = $publications;
-            $publication->staff_id = $staffId; 
+            $publication->staff_id = $staffId;
             $publication->save();
 
             return response()->json(['message' => 'Publication created successfully'], 201);
@@ -154,7 +154,7 @@ class StaffController extends Controller
 
     //         $researchInterest = new ResearchInterest();
     //         $researchInterest->research = $research;
-    //         $researchInterest->staff_id = $staffId; 
+    //         $researchInterest->staff_id = $staffId;
     //         $researchInterest->save();
 
     //         return response()->json(['message' => 'Research Interest created successfully'], 201);

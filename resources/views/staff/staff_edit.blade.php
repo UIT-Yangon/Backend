@@ -31,6 +31,9 @@
                                 <label class="text-black">Department <span class="text-danger">*</span></label>
                                 <select name="department" value="{{ old('department') }}" id="" class="form-control bg-white" style="color:black !important; border:1px solid #3798A6 !important; ">
                                     <option value="Faculty of Computer Science" {{ old('department', $data->department ?? '') == 'Faculty of Computer Science' ? 'selected' : '' }}>Faculty of Computer Science</option>
+                                    <option value="Faculty of Computer Systems and Technologies" {{ old('department', $data->department ?? '') == 'Faculty of Computer Systems and Technologies' ? 'selected' : '' }}>Faculty of Computer Systems and Technologies</option>
+                                    <option value="Faculty of Information Science" {{ old('department', $data->department ?? '') == 'Faculty of Information Science' ? 'selected' : '' }}>Faculty of Information Science </option>
+                                    <option value="Faculty of Computing" {{ old('department', $data->department ?? '') == 'Faculty of Computing' ? 'selected' : '' }}>Faculty of Computing</option>
                                 </select>
                               
                                 @error('department')
